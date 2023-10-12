@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,700&display=swap");
+
+:root {
+  --yellow-color: #f4c214;
+  --white-color: white;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-image: url("https://cdn-umake.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/10/09081848/Error-404-fondo-1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+main.game {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  row-gap: 20px;
+}
+
+main.game > div.wrapper {
+  height: 70vh;
+  width: 80%;
+  text-align: center;
+}
+
+main.game > div.wrapper div.header {
+  position: relative;
+}
+
+main.game > div.wrapper div.header,
+main.game > div.wrapper div.header span {
+  display: grid;
+  place-items: center;
+}
+
+main.game > div.wrapper div.header span {
+  background: var(--yellow-color);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 50px;
+  width: 100px;
+  font-size: 25px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+main.game > div.wrapper article {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  column-gap: 20px;
+}
+
+main.game > div.wrapper article section {
+  box-shadow: 0px 3px 10px #02396b4d;
+  background: var(--white-color);
+}
+
+main.game > div.wrapper article section.dashboard {
+  font-size: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+}
+
+main.game > div.wrapper article section.controls {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden;
+}
+
+button.btn_move {
+  display: none;
+}
+
+@media screen and (max-width: 1100px) {
+  body {
+    height: auto;
+  }
+
+  main.game {
+    row-gap: 60px;
+  }
+
+  main.game > div.wrapper {
+    height: 100%;
+    width: 100%;
+  }
+
+  main.game > div.wrapper div.header span {
+    z-index: 1;
+    top: calc(100% + 10px);
+    border-radius: 10px;
+    right: 10px;
+    height: 25px;
+    width: 50px;
+    font-size: 16px;
+  }
+
+  main.game > div.wrapper article {
+    grid-template-columns: 1fr;
+    grid-template-rows: 100vh 100vh;
+    row-gap: 0px;
+    column-gap: 0px;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+
+  main.game > div.wrapper article section {
+    scroll-snap-align: center;
+    border-radius: 0 !important;
+  }
+
+  .no_copy {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  button.btn_move {
+    display: block;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    z-index: 100;
+  }
+}
