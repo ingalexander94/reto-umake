@@ -3,19 +3,20 @@
 :root {
   --yellow-color: #f4c214;
   --white-color: white;
+  --blue-color: #1974c6;
 }
 
 body {
+  display: grid;
+  place-items: center;
   height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  background-image: url("https://cdn-umake.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/10/09081848/Error-404-fondo-1.png");
+  background-image: url("https://cdn-umake.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/08/04083112/Background_testimonios-1.png");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  margin: 0;
 }
 
-* {
+main.game * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -23,6 +24,7 @@ body {
 
 main.game {
   height: 100%;
+  width: 70vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,9 +33,13 @@ main.game {
   row-gap: 20px;
 }
 
+main.game > div.locked {
+  display: none;
+}
+
 main.game > div.wrapper {
   height: 70vh;
-  width: 80%;
+  width: 100%;
   text-align: center;
 }
 
@@ -48,7 +54,8 @@ main.game > div.wrapper div.header span {
 }
 
 main.game > div.wrapper div.header span {
-  background: var(--yellow-color);
+  background: var(--blue-color);
+  color: var(--white-color);
   position: absolute;
   bottom: 0;
   right: 0;
@@ -71,16 +78,43 @@ main.game > div.wrapper article {
   column-gap: 20px;
 }
 
-main.game > div.wrapper article section {
-  box-shadow: 0px 3px 10px #02396b4d;
-  background: var(--white-color);
-}
-
 main.game > div.wrapper article section.dashboard {
   font-size: 40px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  row-gap: 20px;
+}
+
+main.game > div.wrapper article section.dashboard div {
+  background: var(--white-color);
   display: grid;
   place-items: center;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 3px 10px #02396b4d;
   border-radius: 10px;
+  overflow: hidden;
+}
+
+main.game > div.wrapper article section.dashboard > button {
+  height: 50px;
+  width: 200px;
+  background: var(--yellow-color);
+  color: var(--white-color);
+  border-radius: 12px;
+  border: 1px solid var(--white-color);
+  outline: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+main.game > div.wrapper article section.dashboard button:hover {
+  filter: brightness(0.9);
+}
+
+main.game > div.wrapper article section.dashboard button:active {
+  transform: scale(0.98);
 }
 
 main.game > div.wrapper article section.controls {
@@ -88,51 +122,11 @@ main.game > div.wrapper article section.controls {
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   overflow: hidden;
-}
-
-button.btn_move {
-  display: none;
+  box-shadow: 0px 3px 10px #02396b4d;
+  background: var(--white-color);
 }
 
 @media screen and (max-width: 1100px) {
-  body {
-    height: auto;
-  }
-
-  main.game {
-    row-gap: 60px;
-  }
-
-  main.game > div.wrapper {
-    height: 100%;
-    width: 100%;
-  }
-
-  main.game > div.wrapper div.header span {
-    z-index: 1;
-    top: calc(100% + 10px);
-    border-radius: 10px;
-    right: 10px;
-    height: 25px;
-    width: 50px;
-    font-size: 16px;
-  }
-
-  main.game > div.wrapper article {
-    grid-template-columns: 1fr;
-    grid-template-rows: 100vh 100vh;
-    row-gap: 0px;
-    column-gap: 0px;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100vh;
-  }
-
-  main.game > div.wrapper article section {
-    scroll-snap-align: center;
-    border-radius: 0 !important;
-  }
-
   .no_copy {
     -webkit-user-select: none;
     -webkit-touch-callout: none;
@@ -140,12 +134,51 @@ button.btn_move {
     -ms-user-select: none;
     user-select: none;
   }
+}
 
-  button.btn_move {
-    display: block;
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    z-index: 100;
+@media screen and (max-width: 1100px) and (orientation: landscape) {
+  main.game > div.wrapper {
+    width: 95vw;
+    height: 85%;
+  }
+
+  main.game > div.wrapper div.header span {
+    height: 25px;
+    width: fit-content;
+    padding: 0 10px;
+    font-size: 12px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+  main.game > div.wrapper article section.dashboard {
+    font-size: 20px;
+    row-gap: 10px;
+  }
+
+  main.game > div.wrapper article section.dashboard button {
+    height: 30px;
+    width: 100px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width: 1100px) and (orientation: portrait) {
+  main.game {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+  }
+
+  main.game > div.locked {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  main.game > div.wrapper {
+    display: none;
   }
 }

@@ -1,3 +1,5 @@
+import { createGame } from "./js/kaboom.js";
+
 const $d = document;
 
 $d.addEventListener("DOMContentLoaded", () => {
@@ -10,4 +12,5 @@ function init() {
     toolbox: $d.getElementById("toolbox"),
   });
   Blockly.Xml.domToWorkspace($d.getElementById("startBlocks"), demoWorkspace);
+  createGame();
 }
