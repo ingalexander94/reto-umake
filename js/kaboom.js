@@ -19,19 +19,15 @@ const createGame = () => {
   kaboom(CONFIG);
   loadAssets();
   loadSprite("fondo", "../assets/img/fondo1.avif");
+  loadSprite("hearth", "../assets/img/hearth.png");
   loadSprite(
     "ship",
     "https://cdn-umake.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/08/16114324/nave-front.png"
   );
   add([sprite("fondo"), scale(1.1, 1.3)]);
   generateEnemies();
-  add([
-    timer(),
-    sprite("ship"),
-    pos(width - 80, height - 80),
-    area(),
-    scale(0.4, 0.4),
-  ]);
+  add([sprite("ship"), pos(width - 80, height - 80), scale(0.4, 0.4)]);
+  add([sprite("hearth"), pos(250, 50), scale(0.03, 0.03)]);
 };
 
 const loadAssets = () => {
