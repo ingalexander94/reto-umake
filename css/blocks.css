@@ -2,3 +2,24 @@
   height: 100%;
   width: 100%;
 }
+
+.blocklyToolboxDiv {
+  width: 120px;
+  background-color: #ccd5ed;
+}
+
+.blocklyToolboxDiv::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 50px;
+  left: 0px;
+  background-image: url("../assets/ui/line.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 500px 130%;
+}
+
+.blocklyTreeIcon {
+  width: 0;
+}

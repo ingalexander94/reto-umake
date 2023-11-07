@@ -1,12 +1,6 @@
-import { generateNumberAleatory } from "./utils.js";
-
 const $d = document;
 
 const canvas = $d.getElementById("canvas");
-
-const frame = $d.querySelector("div.frame");
-
-const { offsetWidth: width, offsetHeight: height } = frame;
 
 const CONFIG = { width: 500, height: 500, canvas, global: true };
 
@@ -36,8 +30,6 @@ const loadAssets = () => {
   loadSprite("o4", "../assets/ui/obstacle4.png");
   loadSprite("o5", "../assets/ui/obstacle5.png");
 };
-
-// fondo.scale = 2;
 
 function generateEnemies() {
   const enemies = get("enemy");

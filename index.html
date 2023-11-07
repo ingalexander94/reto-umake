@@ -5,26 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/blocks.css" />
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="shortcut icon" href="./assets/ui/favicon.png" type="image/x-icon">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
       integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
     <title>Umake | Reto 1</title>
   </head>
   <body>
     <main class="game">
       <div class="locked">
-        <img
-        class="animate__animated animate__rotateIn animate__slower animate__infinite"
-          src="https://studio.code.org/blockly/media/turnphone_horizontal.png"
-          alt="Game locked photo"
-        />
+
       </div>
       <div class="wrapper">
         <article>
@@ -32,10 +25,10 @@
             <div class="no_copy frame">
               <canvas id="canvas"></canvas>
               <div class="timer">
-                <span>11:11</span>
+                <span>00:00</span>
               </div>
             </div>
-            <button></button>
+            <button id="play"></button>
           </section>
           <section class="controls">
             <div id="blocklyDiv">
@@ -44,8 +37,7 @@
                 id="toolbox"
                 style="display: none"
               >
-                <category name="Panel" colour="blue">
-                  <block type="move_block"></block>
+                <category name="Panel" colour="#5973B6">
                   <block type="move_direction_block"></block>
               </category>
               </xml>
@@ -55,7 +47,7 @@
                 id="startBlocks"
                 style="display: none"
               >
-                
+              
               </xml>
             </div>
           </section>
@@ -66,6 +58,7 @@
     <script src="https://unpkg.com/kaboom@3000.0.1/dist/kaboom.js"></script>
     <script src="https://unpkg.com/blockly@10.1.3/blockly_compressed.js"></script>
     <script src="https://unpkg.com/blockly@10.1.3/blocks_compressed.js"></script>
+    <script src="https://unpkg.com/blockly@10.1.3/javascript_compressed.js"></script>
     <script src="https://unpkg.com/blockly@10.1.3/msg/es.js"></script>
 
     <script type="module" src="./index.js"></script>

@@ -1,50 +1,20 @@
+import { BlocksControl } from "./js/blocks.js";
 import { createGame } from "./js/kaboom.js";
+import { startTimer } from "./js/timer.js";
 
 const $d = document;
 
+const blockControl = new BlocksControl("blocklyDiv");
+
 $d.addEventListener("DOMContentLoaded", () => {
-  init();
+  createGame();
+  startTimer();
+  blockControl.createMainBlock();
+  blockControl.createMoveBlock();
 });
 
-function init() {
-  var demoWorkspace = Blockly.inject("blocklyDiv", {
-    media: "https://unpkg.com/blockly@10.1.3/media/",
-    toolbox: $d.getElementById("toolbox"),
-  });
-  Blockly.Xml.domToWorkspace($d.getElementById("startBlocks"), demoWorkspace);
-  Blockly.Blocks["move_block"] = {
-    init: function () {
-      this.appendStatementInput("DIRECTIONS")
-        .setCheck(null)
-        .appendField("Mover objeto");
-      this.setColour(230);
-      this.setTooltip("Move the object in specified directions");
-      this.setHelpUrl("");
-    },
-  };
+const btnPlay = $d.getElementById("play");
 
-  Blockly.Blocks["move_direction_block"] = {
-    init: function () {
-      this.appendDummyInput()
-        .appendField("Mover hacia")
-        .appendField(
-          new Blockly.FieldDropdown([
-            ["arriba", "ARRIBA"],
-            ["abajo", "ABAJO"],
-            ["derecha", "DERECHA"],
-            ["izquierda", "IZQUIERDA"],
-          ])
-        );
-      this.setInputsInline(true);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-      this.setColour(230);
-      this.setTooltip(
-        "Move the object in a specific direction for a given distance"
-      );
-      this.setHelpUrl("");
-    },
-  };
-
-  createGame();
-}
+btnPlay.addEventListener("click", () => {
+  blockControl.play();
+});
