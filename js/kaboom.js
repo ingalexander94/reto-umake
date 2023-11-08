@@ -15,17 +15,51 @@ const createGame = () => {
   kaboom(CONFIG);
   loadAssets();
   add([sprite("layer"), scale(1, 1)]);
-  generateEnemies();
+  generateObstacles();
   player = add([
     timer(),
     sprite("player"),
     rotate(0),
     anchor("center"),
+    area(),
     pos(500 - 35, 500 - 110),
     scale(0.03, 0.03),
   ]);
-  add([sprite("bar1"), pos(500 - 110, 405), scale(0.06, 0.06)]);
-  add([sprite("bar2"), pos(405, 55), scale(0.06, 0.06)]);
+  generateCollisions();
+  add([
+    sprite("bar1"),
+    pos(520 - 110, 430),
+    scale(0.06, 0.06),
+    area(),
+    "obstacle",
+  ]);
+  add([sprite("bar2"), pos(430, 74), scale(0.06, 0.06), area(), "obstacle"]);
+};
+
+function spin() {
+  return {
+    id: "spin",
+    update() {
+      this.scale = Math.sin(time() * 2);
+      this.angle = time() * 60;
+    },
+  };
+}
+
+const generateCollisions = () => {
+  player.onCollide("obstacle", (_) => {
+    player.destroy();
+    add([
+      sprite("burst"),
+      pos(width() / 2, height() / 2),
+      rotate(0),
+      spin(),
+      anchor("center"),
+    ]);
+    wait(2, () => {
+      location.reload();
+    });
+  });
 };
 
 const loadAssets = () => {
@@ -38,12 +72,13 @@ const loadAssets = () => {
   loadSprite("o3", "../assets/ui/obstacle3.png");
   loadSprite("o4", "../assets/ui/obstacle4.png");
   loadSprite("o5", "../assets/ui/obstacle5.png");
+  loadSprite("burst", "../assets/ui/prueba2.png");
 };
 
-function generateEnemies() {
-  const enemies = get("enemy");
-  if (enemies.length) {
-    enemies.forEach((item) => item.destroy());
+function generateObstacles() {
+  const obstacles = get("obstacle");
+  if (obstacles.length) {
+    obstacles.forEach((item) => item.destroy());
   }
   for (let i = 0; i < 5; i++) {
     const x = rand(50, 300);
@@ -53,13 +88,19 @@ function generateEnemies() {
       pos(x, y),
       scale(isMobile ? 0.1 : 0.15, isMobile ? 0.1 : 0.15),
       area(),
-      "enemy",
+      "obstacle",
     ];
     add(ghost);
   }
 }
 
 const move = (direction) => {
+  let { x, y } = player.pos;
+  x = parseInt(x);
+  y = parseInt(y);
+  if (x === 395 && y === 40 && !direction.includes("GIRAR")) {
+    $("#myModal").modal("show");
+  }
   switch (direction) {
     case "IZQUIERDA":
       player.move(-SPEED, 0);
@@ -84,6 +125,7 @@ const move = (direction) => {
       break;
     case "GIRAR-ABAJO":
       player.angle = 180;
+      console.log(player.pos);
       break;
     default:
       player.angle = 0;
@@ -99,7 +141,7 @@ function movePlayer(movements) {
       position += 1;
       if (position === movements.length) {
         movements.length = 0;
-      } else {
+      } else if (position < movements.length) {
         move(movements[position]);
       }
     });

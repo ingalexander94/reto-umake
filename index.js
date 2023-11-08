@@ -4,6 +4,9 @@ import { startTimer } from "./js/timer.js";
 
 const $d = document;
 
+const btnRepeat = $d.querySelector("button.btn-repeat");
+const btnContinue = $d.querySelector("button.btn-continue");
+
 const blockControl = new BlocksControl("blocklyDiv");
 
 $d.addEventListener("DOMContentLoaded", () => {
@@ -30,4 +33,14 @@ btnPlay.addEventListener("click", () => {
     }
   }
   movePlayer(instructions);
+});
+
+btnRepeat.addEventListener("click", () => {
+  location.reload();
+});
+
+btnContinue.addEventListener("click", () => {
+  $("#myModal").modal("hide");
+  window.location.replace("/reto2.html");
+  window.history.replaceState({}, document.title, window.location.href);
 });
