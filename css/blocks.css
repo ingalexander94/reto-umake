@@ -3,6 +3,18 @@
   width: 100%;
 }
 
+.blocklySvg {
+  height: 100% !important;
+}
+
+.blocklyTrash {
+  transform: translate(474px, 495px) !important;
+}
+
+.blocklyScrollbarHorizontal {
+  transform: translate(120.5px, 574.5px) !important;
+}
+
 .blocklyToolboxDiv {
   width: 120px;
   background-color: #ccd5ed;

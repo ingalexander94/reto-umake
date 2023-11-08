@@ -23,7 +23,7 @@ class BlocksControl {
           .setCheck("Option")
           .appendField("Mover objeto");
         this.setColour(120);
-        this.setOutput(true, "Array");
+        this.setOutput(false, null);
         this.setTooltip("Mover el objeto en direcciones específicas");
         this.setHelpUrl("");
       },
@@ -35,7 +35,7 @@ class BlocksControl {
       const dropdownValue = Blockly.JavaScript.valueToCode(
         block,
         "OPTIONS",
-        Blockly.JavaScript.ORDER_ATOMIC
+        Blockly.JavaScript.ORDER_NONE
       );
       return dropdownValue;
     };
@@ -71,13 +71,21 @@ class BlocksControl {
       block
     ) {
       var dropdownValue = block.getFieldValue("OPTION");
-      return [dropdownValue, Blockly.JavaScript.ORDER_ATOMIC];
+      return ["'" + dropdownValue + "'", Blockly.JavaScript.ORDER_NONE];
     };
   }
 
   play() {
-    const code = Blockly.JavaScript.workspaceToCode(this.#workspace);
-    console.log(code);
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    let movements = [];
+    let code = Blockly.JavaScript.workspaceToCode(this.#workspace).trim();
+    if (code.length) {
+      code = code.split(",")[0];
+      movements = code.match(/'([^']+)'/g).map(function (match) {
+        return match.slice(1, -1);
+      });
+    }
+    return movements;
   }
 }
 
