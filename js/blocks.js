@@ -1,5 +1,3 @@
-const $d = document;
-
 class BlocksControl {
   #wrapper;
   #workspace;
@@ -12,8 +10,27 @@ class BlocksControl {
   #init() {
     this.#workspace = Blockly.inject(this.#wrapper, {
       media: "https://unpkg.com/blockly@10.1.3/media/",
-      toolbox: $d.getElementById("toolbox"),
+      toolbox: this.#createToolbox(),
+      trashcan: true,
+      scrollbars: true,
+      collapse: true,
     });
+  }
+
+  #createToolbox() {
+    this.createMoveBlock();
+    var toolboxDef = "<xml>";
+    toolboxDef += '<block type="move_direction_block"></block>';
+    toolboxDef += `
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+          <shadow type="math_number">
+              <field name="NUM">3</field>
+          </shadow>
+      </value>
+    </block>`;
+    toolboxDef += "</xml>";
+    return toolboxDef;
   }
 
   createMainBlock() {
@@ -21,15 +38,15 @@ class BlocksControl {
       init: function () {
         this.appendStatementInput("OPTIONS")
           .setCheck("Option")
-          .appendField("Mover objeto");
-        this.setColour(120);
+          .appendField("Mover");
+        this.setColour(137);
         this.setOutput(false, null);
         this.setTooltip("Mover el objeto en direcciones específicas");
         this.setHelpUrl("");
       },
     };
     const customBlock = this.#workspace.newBlock("move_block");
-    customBlock.moveBy(150, 30);
+    customBlock.moveBy(260, 30);
     this.#workspace.getFlyout().createBlock(customBlock);
     javascript.javascriptGenerator.forBlock["move_block"] = function (block) {
       const dropdownValue = Blockly.JavaScript.valueToCode(
@@ -45,7 +62,7 @@ class BlocksControl {
     Blockly.Blocks["move_direction_block"] = {
       init: function () {
         this.appendDummyInput()
-          .appendField("Mover hacia")
+          .appendField("Girar")
           .appendField(
             new Blockly.FieldDropdown([
               ["arriba", "ARRIBA"],
@@ -59,7 +76,7 @@ class BlocksControl {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setOutput(true, "Option");
-        this.setColour(223);
+        this.setColour(224);
         this.setTooltip(
           "Mover el objeto en una dirección específica durante una distancia determinada"
         );

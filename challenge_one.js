@@ -13,7 +13,6 @@ $d.addEventListener("DOMContentLoaded", () => {
   createGame();
   startTimer();
   blockControl.createMainBlock();
-  blockControl.createMoveBlock();
 });
 
 const btnPlay = $d.getElementById("play");

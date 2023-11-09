@@ -267,3 +267,10 @@ main.game > div.wrapper article section div.frame .timer span {
     display: none;
   }
 }
+
+@media screen and (min-width: 1450px) {
+  main.game > div.wrapper article {
+    max-width: 1250px;
+    margin: 0 auto;
+  }
+}

@@ -7,31 +7,72 @@
   height: 100% !important;
 }
 
-.blocklyTrash {
-  transform: translate(474px, 495px) !important;
+.blocklyFlyout {
+  width: 220px;
+  height: 100% !important;
+  background: #ccd5ed;
+  padding-left: 30px !important;
 }
 
-.blocklyScrollbarHorizontal {
-  transform: translate(120.5px, 574.5px) !important;
+.injectionDiv {
+  position: relative;
 }
 
-.blocklyToolboxDiv {
-  width: 120px;
-  background-color: #ccd5ed;
-}
-
-.blocklyToolboxDiv::before {
+.injectionDiv::after {
   content: "";
   position: absolute;
-  height: 100%;
+  left: -10px;
   width: 50px;
-  left: 0px;
+  height: 100%;
   background-image: url("../assets/ui/line.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 500px 130%;
+  background-size: 300px 140%;
+  z-index: 30;
+}
+
+.blocklyFlyoutBackground {
+  fill: transparent;
+  fill-opacity: none;
+}
+
+.blocklyTrash {
+  transform: translate(550px, 495px) !important;
 }
 
 .blocklyTreeIcon {
   width: 0;
+}
+
+.banner-challenge {
+  position: absolute;
+  z-index: 30;
+  top: 25px;
+  font: normal normal bold 30px Poppins;
+  display: flex;
+  width: 230px;
+  color: #758ec7;
+  justify-content: center;
+}
+
+.banner-challenge span {
+  font: normal normal bold 18px Poppins;
+  width: 25px;
+  height: 25px;
+  background: white;
+  color: #f4d3ce;
+  display: grid;
+  place-items: center;
+  position: relative;
+  top: 20px;
+}
+
+.blocklyScrollbarHorizontal {
+  display: none;
+}
+
+@media screen and (max-width: 1449px) {
+  .blocklyTrash {
+    transform: translate(500px, 495px) !important;
+  }
 }
