@@ -6,6 +6,7 @@ let minutesText = "";
 let secondText = "";
 
 const timer = $d.querySelector("div.timer span");
+const gems = $d.querySelector("span#show_gemas");
 
 const startTimer = () => {
   setInterval(() => {
@@ -17,4 +18,8 @@ const startTimer = () => {
   }, 1000);
 };
 
-export { startTimer };
+const setGemsText = (number) => {
+  gems.textContent = `${number}/3`;
+};
+
+export { startTimer, setGemsText };

@@ -43,19 +43,31 @@ body {
 }
 
 .modal-content > div div.buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
   column-gap: 20px;
   width: 80%;
+  margin-top: 10px;
 }
 
 .modal-content > div div.buttons button {
   border: none;
   outline: none;
+  width: 100%;
+  height: 44px;
+  color: #1974c6;
+  outline: 2px solid #1974c6;
+  background: white;
+  font: normal normal bold 20px/22px Poppins;
+}
+
+.modal-content > div div.buttons button.active {
   background: #1974c6;
   color: white;
-  height: 44px;
-  font: normal normal bold 20px/22px Poppins;
+}
+
+.modal-content > div div.buttons button.active:hover {
+  background: #18a4cf;
+  outline: 2px solid #18a4cf;
 }
 
 main.game * {
@@ -106,7 +118,7 @@ main.game > div.wrapper article section.dashboard {
   row-gap: 20px;
 }
 
-main.game > div.wrapper article section.dashboard > div {
+main.game > div.wrapper article section.dashboard > div:not(.info) {
   background: var(--white-color);
   display: grid;
   place-items: center;
@@ -115,7 +127,34 @@ main.game > div.wrapper article section.dashboard > div {
   padding: 15px 0;
 }
 
-main.game > div.wrapper article section.dashboard > button {
+main.game > div.wrapper article section.dashboard > div.info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main.game > div.wrapper article section.dashboard > div.info div {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+main.game > div.wrapper article section.dashboard > div.info div span {
+  font-size: 20px;
+  color: white;
+  width: 60px;
+  letter-spacing: 5px;
+}
+
+main.game > div.wrapper article section.dashboard > div.info div img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+main.game > div.wrapper article section.dashboard > div.info button {
   height: 50px;
   width: 120px;
   cursor: pointer;
@@ -129,7 +168,7 @@ main.game > div.wrapper article section.dashboard > button {
   cursor: pointer;
 }
 
-main.game > div.wrapper article section.dashboard > button:active {
+main.game > div.wrapper article section.dashboard > div.info > button:active {
   transform: scale(0.9);
 }
 

@@ -1,3 +1,6 @@
+import { setGemsText } from "./timer.js";
+import { getPositionsChallengeTwo, getPositionsGems } from "./utils.js";
+
 const $d = document;
 
 const canvas = $d.getElementById("canvas");
@@ -7,6 +10,8 @@ const CONFIG = { width: 500, height: 500, canvas, global: true };
 const SPEED = 4200;
 
 let player = null;
+
+let numberGems = 0;
 
 const isMobile =
   window.innerWidth < 1100 && screen.orientation.type === "landscape-primary";
@@ -26,6 +31,8 @@ const createGame = () => {
     scale(0.03, 0.03),
   ]);
   generateCollisions();
+  generateGems();
+  generateCollectGem();
   add([
     sprite("bar1"),
     pos(520 - 110, 430),
@@ -62,6 +69,14 @@ const generateCollisions = () => {
   });
 };
 
+const generateCollectGem = () => {
+  player.onCollide("gem", (gem) => {
+    gem.destroy();
+    numberGems += 1;
+    setGemsText(numberGems);
+  });
+};
+
 const loadAssets = () => {
   loadSprite("layer", "../assets/ui/layer.png");
   loadSprite("player", "../assets/ui/player.png");
@@ -72,7 +87,10 @@ const loadAssets = () => {
   loadSprite("o3", "../assets/ui/obstacle3.png");
   loadSprite("o4", "../assets/ui/obstacle4.png");
   loadSprite("o5", "../assets/ui/obstacle5.png");
-  loadSprite("burst", "../assets/ui/prueba2.png");
+  loadSprite("g1", "../assets/ui/gem1.png");
+  loadSprite("g2", "../assets/ui/gem2.png");
+  loadSprite("g3", "../assets/ui/gem3.png");
+  loadSprite("burst", "../assets/ui/burst.png");
 };
 
 function generateObstacles() {
@@ -81,16 +99,33 @@ function generateObstacles() {
     obstacles.forEach((item) => item.destroy());
   }
   for (let i = 0; i < 5; i++) {
-    const x = rand(50, 300);
-    const y = rand(50, 450);
-    const ghost = [
+    const [x, y] = getPositionsChallengeTwo(i);
+    const obstacle = [
       sprite(`o${1 + i}`),
       pos(x, y),
-      scale(isMobile ? 0.1 : 0.15, isMobile ? 0.1 : 0.15),
+      scale(isMobile ? 0.1 : 0.2, isMobile ? 0.1 : 0.2),
       area(),
       "obstacle",
     ];
-    add(ghost);
+    add(obstacle);
+  }
+}
+
+function generateGems() {
+  const gems = get("gem");
+  if (gems.length) {
+    gems.forEach((item) => item.destroy());
+  }
+  for (let i = 0; i < 3; i++) {
+    const [x, y] = getPositionsGems(i);
+    const gem = [
+      sprite(`g${1 + i}`),
+      pos(x, y),
+      scale(isMobile ? 0.1 : 0.2, isMobile ? 0.1 : 0.2),
+      area(),
+      "gem",
+    ];
+    add(gem);
   }
 }
 
@@ -98,8 +133,17 @@ const move = (direction) => {
   let { x, y } = player.pos;
   x = parseInt(x);
   y = parseInt(y);
-  if (x === 395 && y === 40 && !direction.includes("GIRAR")) {
-    $("#myModal").modal("show");
+  if (
+    x > 390 &&
+    y < 45 &&
+    !direction.includes("GIRAR") &&
+    !direction.includes("IZQUIERDA")
+  ) {
+    if (numberGems === 3) {
+      $("#modal_success").modal("show");
+    } else {
+      $("#modal_error").modal("show");
+    }
   }
   switch (direction) {
     case "IZQUIERDA":
@@ -125,7 +169,6 @@ const move = (direction) => {
       break;
     case "GIRAR-ABAJO":
       player.angle = 180;
-      console.log(player.pos);
       break;
     default:
       player.angle = 0;

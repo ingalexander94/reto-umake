@@ -1,5 +1,5 @@
 import { BlocksControl } from "./js/blocks.js";
-import { createGame, movePlayer } from "./js/kaboom.js";
+import { createGame, movePlayer } from "./js/kaboom_one.js";
 import { startTimer } from "./js/timer.js";
 
 const $d = document;
@@ -40,7 +40,7 @@ btnRepeat.addEventListener("click", () => {
 });
 
 btnContinue.addEventListener("click", () => {
-  $("#myModal").modal("hide");
+  $("#modal_success").modal("hide");
   window.location.replace("/reto2.html");
   window.history.replaceState({}, document.title, window.location.href);
 });
