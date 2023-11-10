@@ -47,7 +47,7 @@ function spin() {
   return {
     id: "spin",
     update() {
-      this.scale = Math.sin(time() * 2);
+      this.scale = Math.sin(time() * 3);
       this.angle = time() * 60;
     },
   };
@@ -72,8 +72,18 @@ const generateCollisions = () => {
 const generateCollectGem = () => {
   player.onCollide("gem", (gem) => {
     gem.destroy();
+    const glow = add([
+      sprite("glow"),
+      pos(player.pos.x, player.pos.y),
+      rotate(0),
+      spin(),
+      anchor("center"),
+    ]);
     numberGems += 1;
     setGemsText(numberGems);
+    wait(1, () => {
+      glow.destroy();
+    });
   });
 };
 
@@ -91,6 +101,7 @@ const loadAssets = () => {
   loadSprite("g2", "../assets/ui/gem2.png");
   loadSprite("g3", "../assets/ui/gem3.png");
   loadSprite("burst", "../assets/ui/burst.png");
+  loadSprite("glow", "../assets/ui/glow.png");
 };
 
 function generateObstacles() {

@@ -38,6 +38,7 @@
 
 .blocklyTrash {
   transform: translate(550px, 495px) !important;
+  opacity: 1 !important;
 }
 
 .blocklyTreeIcon {
@@ -71,8 +72,14 @@
   display: none;
 }
 
-@media screen and (max-width: 1449px) {
+@media screen and (max-width: 1500px) {
   .blocklyTrash {
     transform: translate(500px, 495px) !important;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .blocklyTrash {
+    transform: translate(470px, 495px) !important;
   }
 }

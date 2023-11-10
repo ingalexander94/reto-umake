@@ -22,4 +22,20 @@ const setGemsText = (number) => {
   gems.textContent = `${number}/3`;
 };
 
-export { startTimer, setGemsText };
+const setTrashIcon = () => {
+  const icons = $d.querySelectorAll("g.blocklyTrash image");
+  const clipPaths = $d.querySelectorAll("g.blocklyTrash clipPath rect");
+  clipPaths[0].setAttribute("width", "90");
+  clipPaths[0].setAttribute("height", "80");
+  clipPaths[1].setAttribute("width", "90");
+  clipPaths[1].setAttribute("height", "18");
+  icons.forEach((icon) => {
+    icon.setAttribute(
+      "xlink:href",
+      "https://cdn-umake.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/11/09214958/trash.png"
+    );
+    icon.setAttribute("height", "150");
+  });
+};
+
+export { startTimer, setGemsText, setTrashIcon };

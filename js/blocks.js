@@ -1,9 +1,11 @@
 class BlocksControl {
   #wrapper;
   #workspace;
+  #challenge;
 
-  constructor(wrapper) {
+  constructor(wrapper, challenge) {
     this.#wrapper = wrapper;
+    this.#challenge = challenge;
     this.#init();
   }
 
@@ -21,14 +23,16 @@ class BlocksControl {
     this.createMoveBlock();
     var toolboxDef = "<xml>";
     toolboxDef += '<block type="move_direction_block"></block>';
-    toolboxDef += `
-    <block type="controls_repeat_ext">
-      <value name="TIMES">
-          <shadow type="math_number">
-              <field name="NUM">3</field>
-          </shadow>
-      </value>
-    </block>`;
+    if (this.#challenge === 2) {
+      toolboxDef += `
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+            <shadow type="math_number">
+                <field name="NUM">3</field>
+            </shadow>
+        </value>
+      </block>`;
+    }
     toolboxDef += "</xml>";
     return toolboxDef;
   }
@@ -38,7 +42,7 @@ class BlocksControl {
       init: function () {
         this.appendStatementInput("OPTIONS")
           .setCheck("Option")
-          .appendField("Mover");
+          .appendField("Ejecutar");
         this.setColour(137);
         this.setOutput(false, null);
         this.setTooltip("Mover el objeto en direcciones específicas");
@@ -62,7 +66,7 @@ class BlocksControl {
     Blockly.Blocks["move_direction_block"] = {
       init: function () {
         this.appendDummyInput()
-          .appendField("Girar")
+          .appendField("Ir a")
           .appendField(
             new Blockly.FieldDropdown([
               ["arriba", "ARRIBA"],

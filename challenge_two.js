@@ -1,18 +1,19 @@
 import { BlocksControl } from "./js/blocks.js";
 import { createGame, movePlayer } from "./js/kaboom_two.js";
-import { startTimer } from "./js/timer.js";
+import { setTrashIcon, startTimer } from "./js/timer.js";
 
 const $d = document;
 
 const btnRepeat = $d.querySelector("button.btn-repeat");
 const btnClose = $d.querySelector("button.btn-close");
 
-const blockControl = new BlocksControl("blocklyDiv");
+const blockControl = new BlocksControl("blocklyDiv", 2);
 
 $d.addEventListener("DOMContentLoaded", () => {
   createGame();
   startTimer();
   blockControl.createMainBlock();
+  setTrashIcon();
 });
 
 const btnPlay = $d.getElementById("play");
