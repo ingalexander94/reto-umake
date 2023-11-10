@@ -13,7 +13,7 @@ $d.addEventListener("DOMContentLoaded", () => {
   createGame();
   startTimer();
   blockControl.createMainBlock();
-  setTrashIcon();
+  setTrashIcon(1);
 });
 
 const btnPlay = $d.getElementById("play");

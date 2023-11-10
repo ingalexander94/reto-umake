@@ -5,10 +5,11 @@
 
 .blocklySvg {
   height: 100% !important;
+  background: #e0f0fc !important;
 }
 
 .blocklyFlyout {
-  width: 220px;
+  width: 215px;
   height: 100% !important;
   background: #ccd5ed;
   padding-left: 30px !important;
@@ -31,13 +32,35 @@
   z-index: 30;
 }
 
+.name_challenge {
+  position: absolute;
+  z-index: 30;
+  width: 215px;
+  height: 80px;
+  line-height: 80px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #758ec7;
+}
+
+.name_challenge span {
+  position: absolute;
+  background: #f8e6e3;
+  width: 25px;
+  height: 25px;
+  color: #f1c7c1;
+  line-height: 25px;
+  top: 35px;
+  border: 1px solid white;
+}
+
 .blocklyFlyoutBackground {
   fill: transparent;
   fill-opacity: none;
 }
 
 .blocklyTrash {
-  transform: translate(550px, 495px) !important;
+  transform: translate(520px, 520px) !important;
   opacity: 1 !important;
 }
 
@@ -74,12 +97,12 @@
 
 @media screen and (max-width: 1500px) {
   .blocklyTrash {
-    transform: translate(500px, 495px) !important;
+    transform: translate(500px, 520px) !important;
   }
 }
 
 @media screen and (max-width: 1300px) {
   .blocklyTrash {
-    transform: translate(470px, 495px) !important;
+    transform: translate(470px, 520px) !important;
   }
 }

@@ -6,7 +6,12 @@ const canvas = $d.getElementById("canvas");
 
 const CONFIG = { width: 500, height: 500, canvas, global: true };
 
-const SPEED = 4200;
+// 1280
+// 1920
+
+// 36%
+
+const SPEED = window.screen.availWidth < 1500 ? 4200 : 5400;
 
 let player = null;
 

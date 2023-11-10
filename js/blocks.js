@@ -16,12 +16,16 @@ class BlocksControl {
       trashcan: true,
       scrollbars: true,
       collapse: true,
+      renderer: "thrasos",
     });
   }
 
   #createToolbox() {
     this.createMoveBlock();
     var toolboxDef = "<xml>";
+    toolboxDef += `<label text="" web-class="myLabelStyle"></label>`;
+    toolboxDef += `<label text="" web-class="myLabelStyle"></label>`;
+    toolboxDef += `<label text="" web-class="myLabelStyle"></label>`;
     toolboxDef += '<block type="move_direction_block"></block>';
     if (this.#challenge === 2) {
       toolboxDef += `
@@ -43,7 +47,7 @@ class BlocksControl {
         this.appendStatementInput("OPTIONS")
           .setCheck("Option")
           .appendField("Ejecutar");
-        this.setColour(137);
+        this.setColour(115);
         this.setOutput(false, null);
         this.setTooltip("Mover el objeto en direcciones específicas");
         this.setHelpUrl("");

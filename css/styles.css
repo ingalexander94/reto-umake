@@ -80,7 +80,6 @@ main.game {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   width: 90vw;
   font-family: "Poppins", sans-serif;
 }
@@ -115,7 +114,6 @@ main.game > div.wrapper article section.dashboard {
   border-radius: 10px;
   display: grid;
   grid-template-rows: 1fr auto;
-  row-gap: 20px;
 }
 
 main.game > div.wrapper article section.dashboard > div:not(.info) {
@@ -128,8 +126,8 @@ main.game > div.wrapper article section.dashboard > div:not(.info) {
 }
 
 main.game > div.wrapper article section.dashboard > div.info {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
 }
 
@@ -185,32 +183,33 @@ main.game > div.wrapper article section div.frame {
   position: relative;
 }
 
-main.game > div.wrapper article section div.frame .timer {
-  position: absolute;
-  bottom: -12px;
-  background-image: url("../assets/ui/timer.png");
+main.game > div.wrapper article section.dashboard > div.info .timer {
+  background-image: url("../assets/ui/timer_bar.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  width: 280px;
+  width: 350px;
   margin: 0 auto;
-  height: 60px;
+  height: 100px;
+  position: relative;
 }
 
-main.game > div.wrapper article section div.frame .timer span {
-  font-size: 12px;
+main.game > div.wrapper article section.dashboard > div.info .timer span {
+  font-size: 16px;
   font-weight: bold;
   position: absolute;
-  right: 64px;
+  right: 80px;
   color: #29888e;
+  letter-spacing: 0px;
   background: #3ab9d7;
-  width: 52px;
+  width: 65px;
+  height: 25px;
+  line-height: 28px;
   text-align: center;
   display: grid;
   place-items: center;
   border-radius: 3px;
-  top: 19px;
-  font-stretch: expanded;
+  top: 35px;
 }
 
 @media screen and (max-width: 1100px) {
