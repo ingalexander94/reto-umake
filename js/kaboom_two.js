@@ -126,21 +126,66 @@ const generateCollectGem = () => {
 };
 
 const loadAssets = () => {
-  loadSprite("layer", "../assets/ui/layer.png");
-  loadSprite("layerm", "../assets/ui/layerm.png");
-  loadSprite("player", "../assets/ui/player.png");
-  loadSprite("bar1", "../assets/ui/bar1.png");
-  loadSprite("bar2", "../assets/ui/bar2.png");
-  loadSprite("o1", "../assets/ui/obstacle1.png");
-  loadSprite("o2", "../assets/ui/obstacle2.png");
-  loadSprite("o3", "../assets/ui/obstacle3.png");
-  loadSprite("o4", "../assets/ui/obstacle4.png");
-  loadSprite("o5", "../assets/ui/obstacle5.png");
-  loadSprite("g1", "../assets/ui/gem1.png");
-  loadSprite("g2", "../assets/ui/gem2.png");
-  loadSprite("g3", "../assets/ui/gem3.png");
-  loadSprite("burst", "../assets/ui/burst.png");
-  loadSprite("glow", "../assets/ui/glow.png");
+  loadSprite(
+    "layer",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/layer.png"
+  );
+  loadSprite(
+    "layerm",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/layerm.png"
+  );
+  loadSprite(
+    "player",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/player.png"
+  );
+  loadSprite(
+    "bar1",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/bar1.png"
+  );
+  loadSprite(
+    "bar2",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/bar2.png"
+  );
+  loadSprite(
+    "o1",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle1.png"
+  );
+  loadSprite(
+    "o2",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle2.png"
+  );
+  loadSprite(
+    "o3",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle3.png"
+  );
+  loadSprite(
+    "o4",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle4.png"
+  );
+  loadSprite(
+    "o5",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle5.png"
+  );
+  loadSprite(
+    "g1",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/gem1.png"
+  );
+  loadSprite(
+    "g2",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/gem2.png"
+  );
+  loadSprite(
+    "g3",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/gem3.png"
+  );
+  loadSprite(
+    "burst",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/burst.png"
+  );
+  loadSprite(
+    "glow",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/glow.png"
+  );
 };
 
 function generateObstacles(random) {

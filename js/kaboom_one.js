@@ -92,23 +92,56 @@ const generateCollisions = () => {
       anchor("center"),
     ]);
     wait(2, () => {
-      // location.reload();
+      location.reload();
     });
   });
 };
 
 const loadAssets = () => {
-  loadSprite("layer", "../assets/ui/layer.png");
-  loadSprite("layerm", "../assets/ui/layerm.png");
-  loadSprite("player", "../assets/ui/player.png");
-  loadSprite("bar1", "../assets/ui/bar1.png");
-  loadSprite("bar2", "../assets/ui/bar2.png");
-  loadSprite("o1", "../assets/ui/obstacle1.png");
-  loadSprite("o2", "../assets/ui/obstacle2.png");
-  loadSprite("o3", "../assets/ui/obstacle3.png");
-  loadSprite("o4", "../assets/ui/obstacle4.png");
-  loadSprite("o5", "../assets/ui/obstacle5.png");
-  loadSprite("burst", "../assets/ui/burst.png");
+  loadSprite(
+    "layer",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/layer.png"
+  );
+  loadSprite(
+    "layerm",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/layerm.png"
+  );
+  loadSprite(
+    "player",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/player.png"
+  );
+  loadSprite(
+    "bar1",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/bar1.png"
+  );
+  loadSprite(
+    "bar2",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/bar2.png"
+  );
+  loadSprite(
+    "o1",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle1.png"
+  );
+  loadSprite(
+    "o2",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle2.png"
+  );
+  loadSprite(
+    "o3",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle3.png"
+  );
+  loadSprite(
+    "o4",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle4.png"
+  );
+  loadSprite(
+    "o5",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle5.png"
+  );
+  loadSprite(
+    "burst",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/burst.png"
+  );
 };
 
 function generateObstacles() {

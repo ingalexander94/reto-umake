@@ -41,6 +41,8 @@ btnRepeat.addEventListener("click", () => {
 
 btnContinue.addEventListener("click", () => {
   $("#modal_success").modal("hide");
-  window.location.replace("/reto2.html");
+  window.location.replace(
+    "https://ingalexander94.github.io/reto-umake/reto2.html"
+  );
   window.history.replaceState({}, document.title, window.location.href);
 });
