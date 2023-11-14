@@ -1,3 +1,5 @@
+import movements from "../assets/movements.json" assert { type: "json" };
+
 const generateNumberAleatory = () => {
   let numeroAleatorio = Math.random();
   numeroAleatorio = numeroAleatorio + 1;
@@ -5,35 +7,49 @@ const generateNumberAleatory = () => {
   return numeroAleatorio;
 };
 
-const getPositionsChallengeOne = (index) => {
-  const movements = [
-    [220, 75],
-    [290, 370],
-    [140, 150],
-    [160, 300],
-    [370, 180],
-  ];
-  return movements[index];
+const getPositionsChallengeOne = (index, random) => {
+  const isMobile =
+    window.innerWidth < 1100 && screen.orientation.type === "landscape-primary";
+  const movs = isMobile
+    ? movements.mobile.challengeOne[random]
+    : movements.web.challengeOne[random];
+  return movs[index];
 };
 
-const getPositionsChallengeTwo = (index) => {
-  const movements = [
-    [295, 360],
-    [355, 220],
-    [100, 150],
-    [300, 90],
-    [10, 400],
-  ];
-  return movements[index];
+const getPositionsChallengeTwo = (index, random) => {
+  const isMobile =
+    window.innerWidth < 1100 && screen.orientation.type === "landscape-primary";
+  const movs = isMobile
+    ? movements.mobile.challengeTwo[random]
+    : movements.web.challengeTwo[random];
+  return movs[index];
 };
 
-const getPositionsGems = (index) => {
-  const movements = [
-    [220, 85],
-    [140, 360],
-    [20, 240],
-  ];
-  return movements[index];
+const getPositionsGems = (index, random) => {
+  const isMobile =
+    window.innerWidth < 1100 && screen.orientation.type === "landscape-primary";
+  const movs = isMobile
+    ? movements.mobile.gems[random]
+    : movements.web.gems[random];
+  return movs[index];
+};
+
+const getRefreshRate = () =>
+  new Promise((resolve) =>
+    requestAnimationFrame((t1) =>
+      requestAnimationFrame((t2) => resolve(1000 / (t2 - t1)))
+    )
+  );
+
+const getSpeed = async () => {
+  let refreshRate = await getRefreshRate();
+  const isMobile =
+    window.innerWidth < 1100 && screen.orientation.type === "landscape-primary";
+  if (isMobile) {
+    return refreshRate < 65 ? 2600 : 4650;
+  } else {
+    return refreshRate < 65 ? 3450 : 4650;
+  }
 };
 
 export {
@@ -41,4 +57,5 @@ export {
   getPositionsChallengeOne,
   getPositionsChallengeTwo,
   getPositionsGems,
+  getSpeed,
 };

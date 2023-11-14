@@ -60,7 +60,7 @@
 }
 
 .blocklyTrash {
-  transform: translate(520px, 520px) !important;
+  transform: translate(520px, 410px) !important;
   opacity: 1 !important;
 }
 
@@ -97,12 +97,27 @@
 
 @media screen and (max-width: 1500px) {
   .blocklyTrash {
-    transform: translate(500px, 520px) !important;
+    transform: translate(500px, 410px) !important;
   }
 }
 
 @media screen and (max-width: 1300px) {
   .blocklyTrash {
-    transform: translate(470px, 520px) !important;
+    transform: translate(470px, 410px) !important;
+  }
+}
+
+@media screen and (max-width: 1100px) and (orientation: landscape) {
+  .blocklyFlyout {
+    width: 160px;
+  }
+
+  .name_challenge {
+    width: 160px;
+  }
+
+  .blocklyTrash {
+    transform: translate(295px, 264px) !important;
+    opacity: 1 !important;
   }
 }

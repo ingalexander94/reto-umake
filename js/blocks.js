@@ -2,10 +2,14 @@ class BlocksControl {
   #wrapper;
   #workspace;
   #challenge;
+  #isMobile;
 
   constructor(wrapper, challenge) {
     this.#wrapper = wrapper;
     this.#challenge = challenge;
+    this.#isMobile =
+      window.innerWidth < 1100 &&
+      screen.orientation.type === "landscape-primary";
     this.#init();
   }
 
@@ -54,7 +58,7 @@ class BlocksControl {
       },
     };
     const customBlock = this.#workspace.newBlock("move_block");
-    customBlock.moveBy(260, 30);
+    customBlock.moveBy(this.#isMobile ? 170 : 260, this.#isMobile ? 10 : 30);
     this.#workspace.getFlyout().createBlock(customBlock);
     javascript.javascriptGenerator.forBlock["move_block"] = function (block) {
       const dropdownValue = Blockly.JavaScript.valueToCode(

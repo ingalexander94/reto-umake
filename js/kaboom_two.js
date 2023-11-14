@@ -1,46 +1,84 @@
 import { setGemsText } from "./timer.js";
-import { getPositionsChallengeTwo, getPositionsGems } from "./utils.js";
+import {
+  getPositionsChallengeTwo,
+  getPositionsGems,
+  getSpeed,
+} from "./utils.js";
 
 const $d = document;
 
 const canvas = $d.getElementById("canvas");
 
-const CONFIG = { width: 500, height: 500, canvas, global: true };
+const isMobile =
+  window.innerWidth < 1100 && screen.orientation.type === "landscape-primary";
 
-const SPEED = window.screen.availWidth < 1500 ? 4200 : 5400;
+const CONFIG = {
+  width: isMobile ? 300 : 400,
+  height: isMobile ? 300 : 400,
+  canvas,
+  global: true,
+};
+
+let SPEED = 0;
 
 let player = null;
 
 let numberGems = 0;
 
-const isMobile =
-  window.innerWidth < 1100 && screen.orientation.type === "landscape-primary";
-
-const createGame = () => {
+const createGame = async () => {
+  SPEED = await getSpeed();
   kaboom(CONFIG);
   loadAssets();
-  add([sprite("layer"), scale(1, 1)]);
-  generateObstacles();
-  player = add([
-    timer(),
-    sprite("player"),
-    rotate(0),
-    anchor("center"),
-    area(),
-    pos(500 - 35, 500 - 110),
-    scale(0.03, 0.03),
-  ]);
+  add([sprite(isMobile ? "layerm" : "layer"), scale(1, 1)]);
+  const random = Math.floor(Math.random() * 3) + 1;
+  generateObstacles(random);
+  if (isMobile) {
+    add([
+      sprite("bar1"),
+      pos(240, 259),
+      scale(0.05, 0.035),
+      area(),
+      "obstacle",
+    ]);
+    add([
+      sprite("bar2"),
+      pos(256, 42),
+      scale(0.038, 0.045),
+      area(),
+      "obstacle",
+    ]);
+    player = add([
+      timer(),
+      sprite("player"),
+      rotate(0),
+      anchor("center"),
+      area(),
+      pos(278, 238),
+      scale(0.018, 0.018),
+    ]);
+  } else {
+    add([
+      sprite("bar1"),
+      pos(326, 345),
+      scale(0.05, 0.047),
+      area(),
+      "obstacle",
+    ]);
+    add([sprite("bar2"), pos(342, 57), scale(0.05, 0.047), area(), "obstacle"]);
+    player = add([
+      timer(),
+      sprite("player"),
+      rotate(0),
+      anchor("center"),
+      area(),
+      pos(370, 318),
+      scale(0.025, 0.025),
+    ]);
+  }
+
   generateCollisions();
-  generateGems();
+  generateGems(random);
   generateCollectGem();
-  add([
-    sprite("bar1"),
-    pos(520 - 110, 430),
-    scale(0.06, 0.06),
-    area(),
-    "obstacle",
-  ]);
-  add([sprite("bar2"), pos(430, 74), scale(0.06, 0.06), area(), "obstacle"]);
 };
 
 function spin() {
@@ -89,6 +127,7 @@ const generateCollectGem = () => {
 
 const loadAssets = () => {
   loadSprite("layer", "../assets/ui/layer.png");
+  loadSprite("layerm", "../assets/ui/layerm.png");
   loadSprite("player", "../assets/ui/player.png");
   loadSprite("bar1", "../assets/ui/bar1.png");
   loadSprite("bar2", "../assets/ui/bar2.png");
@@ -104,17 +143,17 @@ const loadAssets = () => {
   loadSprite("glow", "../assets/ui/glow.png");
 };
 
-function generateObstacles() {
+function generateObstacles(random) {
   const obstacles = get("obstacle");
   if (obstacles.length) {
     obstacles.forEach((item) => item.destroy());
   }
   for (let i = 0; i < 5; i++) {
-    const [x, y] = getPositionsChallengeTwo(i);
+    const [x, y] = getPositionsChallengeTwo(i, random);
     const obstacle = [
       sprite(`o${1 + i}`),
       pos(x, y),
-      scale(isMobile ? 0.1 : 0.2, isMobile ? 0.1 : 0.2),
+      scale(isMobile ? 0.1 : 0.18, isMobile ? 0.1 : 0.18),
       area(),
       "obstacle",
     ];
@@ -122,17 +161,17 @@ function generateObstacles() {
   }
 }
 
-function generateGems() {
+function generateGems(random) {
   const gems = get("gem");
   if (gems.length) {
     gems.forEach((item) => item.destroy());
   }
   for (let i = 0; i < 3; i++) {
-    const [x, y] = getPositionsGems(i);
+    const [x, y] = getPositionsGems(i, random);
     const gem = [
       sprite(`g${1 + i}`),
       pos(x, y),
-      scale(isMobile ? 0.1 : 0.2, isMobile ? 0.1 : 0.2),
+      scale(isMobile ? 0.1 : 0.18, isMobile ? 0.1 : 0.18),
       area(),
       "gem",
     ];
@@ -144,9 +183,9 @@ const move = (direction) => {
   let { x, y } = player.pos;
   x = parseInt(x);
   y = parseInt(y);
+  const isWinner = isMobile ? x > 230 && y < 25 : x > 310 && y < 40;
   if (
-    x > 390 &&
-    y < 45 &&
+    isWinner &&
     !direction.includes("GIRAR") &&
     !direction.includes("IZQUIERDA")
   ) {
