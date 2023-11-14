@@ -92,7 +92,7 @@ const generateCollisions = () => {
       anchor("center"),
     ]);
     wait(2, () => {
-      location.reload();
+      // location.reload();
     });
   });
 };
