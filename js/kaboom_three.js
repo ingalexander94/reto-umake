@@ -112,6 +112,7 @@ const resetPlayer = () => {
       scale(0.025, 0.025),
     ]);
   }
+  generateCollisions();
 };
 
 function spin() {
