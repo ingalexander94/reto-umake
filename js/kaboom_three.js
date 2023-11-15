@@ -113,6 +113,7 @@ const resetPlayer = () => {
     ]);
   }
   generateCollisions();
+  generateCollectGem();
 };
 
 function spin() {
@@ -161,6 +162,7 @@ const generateCollisions = () => {
         ]);
       }
       generateCollisions();
+      generateCollectGem();
     });
   });
 };
