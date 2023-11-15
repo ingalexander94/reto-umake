@@ -31,11 +31,11 @@ const setTrashIcon = (challenge) => {
   clipPaths[1].setAttribute("width", "90");
   clipPaths[1].setAttribute("height", "25");
   icons.forEach((icon) => {
-    icon.setAttribute(
-      "xlink:href",
-      "https://cdn-umake.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/11/09214958/trash.png"
-    );
-    icon.setAttribute("height", "180");
+    icon.setAttribute("xlink:href", "../assets/ui/borrar.png");
+    icon.setAttribute("height", "60");
+    icon.setAttribute("width", "60");
+    icon.setAttribute("x", "0");
+    icon.setAttribute("y", "0");
   });
   nameChallenge.insertAdjacentHTML(
     "afterbegin",

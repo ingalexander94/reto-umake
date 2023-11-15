@@ -26,11 +26,13 @@ class BlocksControl {
 
   #createToolbox() {
     this.createMoveBlock();
+    this.createMoveForeheadBlock();
     var toolboxDef = "<xml>";
     toolboxDef += `<label text="" web-class="myLabelStyle"></label>`;
     toolboxDef += `<label text="" web-class="myLabelStyle"></label>`;
     toolboxDef += `<label text="" web-class="myLabelStyle"></label>`;
     toolboxDef += '<block type="move_direction_block"></block>';
+    // toolboxDef += '<block type="move_front_block"></block>';
     if (this.#challenge === 3) {
       toolboxDef += `
       <block type="controls_repeat_ext">
@@ -97,6 +99,38 @@ class BlocksControl {
     };
 
     javascript.javascriptGenerator.forBlock["move_direction_block"] = function (
+      block
+    ) {
+      var dropdownValue = block.getFieldValue("OPTION");
+      return ["'" + dropdownValue + "'", Blockly.JavaScript.ORDER_NONE];
+    };
+  }
+
+  createMoveForeheadBlock() {
+    Blockly.Blocks["move_front_block"] = {
+      init: function () {
+        this.appendDummyInput()
+          .appendField("Ir a")
+          .appendField(
+            new Blockly.FieldDropdown([
+              ["adelante", "ADELANTE"],
+              ["atras", "ATRÁS"],
+            ]),
+            "OPTION"
+          );
+        this.setInputsInline(true);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setOutput(true, "Option");
+        this.setColour(224);
+        this.setTooltip(
+          "Mover el objeto en una dirección específica durante una distancia determinada"
+        );
+        this.setHelpUrl("");
+      },
+    };
+
+    javascript.javascriptGenerator.forBlock["move_front_block"] = function (
       block
     ) {
       var dropdownValue = block.getFieldValue("OPTION");

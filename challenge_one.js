@@ -1,11 +1,12 @@
 import { BlocksControl } from "./js/blocks.js";
-import { createGame, movePlayer } from "./js/kaboom_one.js";
+import { createGame, movePlayer, resetPlayer } from "./js/kaboom_one.js";
 import { setTrashIcon, startTimer } from "./js/timer.js";
 
 const $d = document;
 
 const btnRepeat = $d.querySelector("button.btn-repeat");
 const btnContinue = $d.querySelector("button.btn-continue");
+const btnRefresh = $d.querySelector("section.controls > button");
 
 const blockControl = new BlocksControl("blocklyDiv", 1);
 
@@ -17,25 +18,40 @@ $d.addEventListener("DOMContentLoaded", () => {
 });
 
 const btnPlay = $d.getElementById("play");
+const btnReplay = $d.getElementById("replay");
 
 btnPlay.addEventListener("click", () => {
   let movements = blockControl.play();
-  const instructions = [];
-  for (let i = 0; i < movements.length; i++) {
-    if (i === 0 && movements[0] !== "ARRIBA") {
-      instructions.push("GIRAR-" + movements[i]);
-      instructions.push(movements[i]);
-    } else {
-      if (i > 0 && !movements[i - 1].includes(movements[i])) {
+  if (movements.length) {
+    btnPlay.style.display = "none";
+    btnReplay.style.display = "block";
+    const instructions = [];
+    for (let i = 0; i < movements.length; i++) {
+      if (i === 0 && movements[0] !== "ARRIBA") {
         instructions.push("GIRAR-" + movements[i]);
+        instructions.push(movements[i]);
+      } else {
+        if (i > 0 && !movements[i - 1].includes(movements[i])) {
+          instructions.push("GIRAR-" + movements[i]);
+        }
+        instructions.push(movements[i]);
       }
-      instructions.push(movements[i]);
     }
+    movePlayer(instructions);
   }
-  movePlayer(instructions);
+});
+
+btnReplay.addEventListener("click", () => {
+  btnPlay.style.display = "block";
+  btnReplay.style.display = "none";
+  resetPlayer();
 });
 
 btnRepeat.addEventListener("click", () => {
+  location.reload();
+});
+
+btnRefresh.addEventListener("click", () => {
   location.reload();
 });
 

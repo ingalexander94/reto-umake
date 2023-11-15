@@ -51,14 +51,39 @@ const createGame = () => {
   }
 };
 
+const resetPlayer = () => {
+  player.destroy();
+  if (isMobile) {
+    player = add([
+      timer(),
+      sprite("player"),
+      rotate(0),
+      anchor("center"),
+      area(),
+      pos(278, 238),
+      scale(0.018, 0.018),
+    ]);
+  } else {
+    player = add([
+      timer(),
+      sprite("player"),
+      rotate(0),
+      anchor("center"),
+      area(),
+      pos(370, 318),
+      scale(0.025, 0.025),
+    ]);
+  }
+};
+
 const loadAssets = () => {
   loadSprite(
     "layer",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/layer.png"
+    "https://ingalexander94.github.io/reto-umake/assets/ui/layer_challenge_one.png"
   );
   loadSprite(
     "layerm",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/layerm.png"
+    "https://ingalexander94.github.io/reto-umake/assets/ui/layerm_challenge_one.png"
   );
   loadSprite(
     "player",
@@ -122,4 +147,4 @@ function movePlayer(movements) {
   }
 }
 
-export { createGame, movePlayer };
+export { createGame, movePlayer, resetPlayer };

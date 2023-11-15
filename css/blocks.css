@@ -60,7 +60,7 @@
 }
 
 .blocklyTrash {
-  transform: translate(520px, 410px) !important;
+  transform: translate(540px, 450px) !important;
   opacity: 1 !important;
 }
 
@@ -97,13 +97,13 @@
 
 @media screen and (max-width: 1500px) {
   .blocklyTrash {
-    transform: translate(500px, 410px) !important;
+    transform: translate(530px, 450px) !important;
   }
 }
 
 @media screen and (max-width: 1300px) {
   .blocklyTrash {
-    transform: translate(470px, 410px) !important;
+    transform: translate(490px, 450px) !important;
   }
 }
 
@@ -117,7 +117,7 @@
   }
 
   .blocklyTrash {
-    transform: translate(295px, 264px) !important;
+    transform: translate(295px, 300px) !important;
     opacity: 1 !important;
   }
 }

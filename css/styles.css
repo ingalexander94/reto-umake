@@ -123,20 +123,25 @@ main.game > div.wrapper article section.dashboard {
 
 main.game > div.wrapper article section.dashboard > button {
   position: absolute;
-  top: -45px;
+  top: -50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   left: 10%;
   padding: 0 20px;
   height: 50px;
   font-size: 16px;
-  color: #00386a;
+  color: white;
   font-weight: bold;
   line-height: 50px;
-  background: white;
+  background: #1974c6;
   z-index: 10;
   border: none;
   cursor: pointer;
+}
+
+main.game > div.wrapper article section.dashboard > button:hover {
+  background: #18a4cf;
+  transition: 0.5 all ease-in;
 }
 
 main.game > div.wrapper article section.dashboard > div:not(.info) {
@@ -194,10 +199,19 @@ main.game > div.wrapper article section.dashboard > div.info button {
   appearance: none;
   background-color: transparent;
   background-size: contain;
-  background-image: url("../assets/ui/play.png");
+
   background-repeat: no-repeat;
   outline: none;
   cursor: pointer;
+}
+
+main.game > div.wrapper article section.dashboard > div.info button#play {
+  background-image: url("../assets/ui/play.png");
+}
+
+main.game > div.wrapper article section.dashboard > div.info button#replay {
+  background-image: url("../assets/ui/replay.png");
+  display: none;
 }
 
 main.game > div.wrapper article section.dashboard > div.info > button:active {
@@ -206,9 +220,31 @@ main.game > div.wrapper article section.dashboard > div.info > button:active {
 
 main.game > div.wrapper article section.controls {
   border-radius: 10px;
-  overflow: hidden;
   box-shadow: 0px 3px 10px #02396b4d;
   background: var(--white-color);
+  position: relative;
+}
+
+main.game > div.wrapper article section.controls > button {
+  top: -49px;
+  right: 0;
+  z-index: 10;
+  position: absolute;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0 20px;
+  height: 50px;
+  font-size: 16px;
+  color: #758ec7;
+  font-weight: bold;
+  line-height: 50px;
+  background: #e0f0fc;
+  border: none;
+  cursor: pointer;
+}
+
+main.game > div.wrapper article section.controls > button:hover {
+  filter: brightness(0.9);
 }
 
 main.game > div.wrapper article section div.frame {
@@ -274,7 +310,8 @@ main.game > div.wrapper article section.dashboard > div.info .timer span {
     row-gap: 10px;
   }
 
-  main.game > div.wrapper article section.dashboard > button {
+  main.game > div.wrapper article section.dashboard > button,
+  main.game > div.wrapper article section.controls > button {
     display: none;
   }
 

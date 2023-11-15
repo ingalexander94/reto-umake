@@ -22,10 +22,15 @@
       integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
     <title>Umake | Reto 1</title>
   </head>
-  <body>
-    <div class="logo">
+  <body class="animate__animated animate__fadeIn">
+    <div class="logo animate__animated animate__jackInTheBox">
       <img
         src="https://cdn-umake.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/07/27154307/Logo_Header.svg"
         alt="Logo de Umake"
@@ -37,19 +42,27 @@
         <article>
           <section class="dashboard">
             <button data-toggle="modal" data-target="#modal_instructions">
-              Ver instrucciones
+              <i class="fas fa-info-circle mr-2"></i> Instrucciones
             </button>
             <div class="no_copy frame">
               <canvas id="canvas"></canvas>
             </div>
             <div class="info">
-              <button id="play"></button>
+              <button
+                class="animate__animated animate__bounceIn"
+                id="play"
+              ></button>
+              <button
+                class="animate__animated animate__bounceIn"
+                id="replay"
+              ></button>
               <div class="timer">
                 <span>00:00</span>
               </div>
             </div>
           </section>
           <section class="controls">
+            <button><i class="fas fa-sync mr-2"></i> Reiniciar juego</button>
             <div id="blocklyDiv"></div>
           </section>
         </article>
@@ -104,13 +117,12 @@
           <div>
             <h3>Instrucciones</h3>
             <iframe
-              width="420"
+              width="400"
               height="315"
-              src="https://www.youtube.com/embed/wDJua9hgyZM?si=A9w-7q4IIzqLj59Z"
+              src="https://www.youtube.com/embed/mWjHgX2SPbU?si=pAfNCZlhuDWhkxZ3&amp;controls=0"
               title="YouTube video player"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
             ></iframe>
             <div class="buttons">
               <button class="btn-continue active" data-dismiss="modal">

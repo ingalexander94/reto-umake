@@ -7,6 +7,9 @@ import {
 
 const $d = document;
 
+const btnPlay = $d.getElementById("play");
+const btnReplay = $d.getElementById("replay");
+
 const canvas = $d.getElementById("canvas");
 
 const isMobile =
@@ -86,6 +89,31 @@ const createGame = () => {
   generateCollectGem();
 };
 
+const resetPlayer = () => {
+  player.destroy();
+  if (isMobile) {
+    player = add([
+      timer(),
+      sprite("player"),
+      rotate(0),
+      anchor("center"),
+      area(),
+      pos(278, 238),
+      scale(0.018, 0.018),
+    ]);
+  } else {
+    player = add([
+      timer(),
+      sprite("player"),
+      rotate(0),
+      anchor("center"),
+      area(),
+      pos(370, 318),
+      scale(0.025, 0.025),
+    ]);
+  }
+};
+
 function spin() {
   return {
     id: "spin",
@@ -99,7 +127,7 @@ function spin() {
 const generateCollisions = () => {
   player.onCollide("obstacle", (_) => {
     player.destroy();
-    add([
+    const burst = add([
       sprite("burst"),
       pos(width() / 2, height() / 2),
       rotate(0),
@@ -107,7 +135,30 @@ const generateCollisions = () => {
       anchor("center"),
     ]);
     wait(2, () => {
-      location.reload();
+      burst.destroy();
+      btnPlay.style.display = "block";
+      btnReplay.style.display = "none";
+      if (isMobile) {
+        player = add([
+          timer(),
+          sprite("player"),
+          rotate(0),
+          anchor("center"),
+          area(),
+          pos(278, 238),
+          scale(0.018, 0.018),
+        ]);
+      } else {
+        player = add([
+          timer(),
+          sprite("player"),
+          rotate(0),
+          anchor("center"),
+          area(),
+          pos(370, 318),
+          scale(0.025, 0.025),
+        ]);
+      }
     });
   });
 };
@@ -291,4 +342,4 @@ function movePlayer(movements) {
   }
 }
 
-export { createGame, movePlayer };
+export { createGame, movePlayer, resetPlayer };
