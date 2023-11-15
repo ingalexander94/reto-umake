@@ -126,7 +126,7 @@ main.game > div.wrapper article section.dashboard > button {
   top: -45px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  left: 0;
+  left: 10%;
   padding: 0 20px;
   height: 50px;
   font-size: 16px;
@@ -143,6 +143,8 @@ main.game > div.wrapper article section.dashboard > div:not(.info) {
   background: var(--white-color);
   display: grid;
   place-items: center;
+  width: 80%;
+  margin: 0 auto;
   box-shadow: 0px 3px 10px #02396b4d;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -152,8 +154,15 @@ main.game > div.wrapper article section.dashboard > div:not(.info) {
 
 main.game > div.wrapper article section.dashboard > div.info {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto auto;
   align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+main.game > div.wrapper article section.dashboard > div.info.extend {
+  grid-template-columns: auto 1fr auto;
+  column-gap: 0;
 }
 
 main.game > div.wrapper article section.dashboard > div.info div {
@@ -274,6 +283,15 @@ main.game > div.wrapper article section.dashboard > div.info .timer span {
     width: 100px;
     font-size: 16px;
     border-radius: 8px;
+  }
+
+  main.game > div.wrapper article section.dashboard > div.info {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  main.game > div.wrapper article section.dashboard > div:not(.info) {
+    width: 100%;
+    border-radius: 10px;
   }
 
   main.game > div.wrapper article section.dashboard > div.info .timer {
