@@ -160,6 +160,7 @@ const generateCollisions = () => {
           scale(0.025, 0.025),
         ]);
       }
+      generateCollisions();
     });
   });
 };
