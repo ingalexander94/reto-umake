@@ -31,7 +31,10 @@ const setTrashIcon = (challenge) => {
   clipPaths[1].setAttribute("width", "90");
   clipPaths[1].setAttribute("height", "25");
   icons.forEach((icon) => {
-    icon.setAttribute("xlink:href", "../assets/ui/borrar.png");
+    icon.setAttribute(
+      "xlink:href",
+      "https://ingalexander94.github.io/reto-umake/assets/ui/borrar.png"
+    );
     icon.setAttribute("height", "60");
     icon.setAttribute("width", "60");
     icon.setAttribute("x", "0");
