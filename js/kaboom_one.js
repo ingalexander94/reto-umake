@@ -1,4 +1,4 @@
-import { getPositionsChallengeOne, getSpeed } from "./utils.js";
+import { getSpeed } from "./utils.js";
 
 const $d = document;
 
@@ -16,30 +16,19 @@ const CONFIG = {
 
 let SPEED = 0;
 
+$d.addEventListener("DOMContentLoaded", () => {
+  setTimeout(async () => {
+    SPEED = await getSpeed();
+  }, 1000);
+});
+
 let player = null;
 
-const createGame = async () => {
-  SPEED = await getSpeed();
+const createGame = () => {
   kaboom(CONFIG);
   loadAssets();
   add([sprite(isMobile ? "layerm" : "layer"), scale(1, 1)]);
-  generateObstacles();
-
   if (isMobile) {
-    add([
-      sprite("bar1"),
-      pos(240, 259),
-      scale(0.05, 0.035),
-      area(),
-      "obstacle",
-    ]);
-    add([
-      sprite("bar2"),
-      pos(256, 42),
-      scale(0.038, 0.045),
-      area(),
-      "obstacle",
-    ]);
     player = add([
       timer(),
       sprite("player"),
@@ -50,14 +39,6 @@ const createGame = async () => {
       scale(0.018, 0.018),
     ]);
   } else {
-    add([
-      sprite("bar1"),
-      pos(326, 345),
-      scale(0.05, 0.047),
-      area(),
-      "obstacle",
-    ]);
-    add([sprite("bar2"), pos(342, 57), scale(0.05, 0.047), area(), "obstacle"]);
     player = add([
       timer(),
       sprite("player"),
@@ -68,33 +49,6 @@ const createGame = async () => {
       scale(0.025, 0.025),
     ]);
   }
-  generateCollisions();
-};
-
-function spin() {
-  return {
-    id: "spin",
-    update() {
-      this.scale = Math.sin(time() * 2);
-      this.angle = time() * 60;
-    },
-  };
-}
-
-const generateCollisions = () => {
-  player.onCollide("obstacle", (_) => {
-    player.destroy();
-    add([
-      sprite("burst"),
-      pos(width() / 2, height() / 2),
-      rotate(0),
-      spin(),
-      anchor("center"),
-    ]);
-    wait(2, () => {
-      location.reload();
-    });
-  });
 };
 
 const loadAssets = () => {
@@ -110,64 +64,16 @@ const loadAssets = () => {
     "player",
     "https://ingalexander94.github.io/reto-umake/assets/ui/player.png"
   );
-  loadSprite(
-    "bar1",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/bar1.png"
-  );
-  loadSprite(
-    "bar2",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/bar2.png"
-  );
-  loadSprite(
-    "o1",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle1.png"
-  );
-  loadSprite(
-    "o2",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle2.png"
-  );
-  loadSprite(
-    "o3",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle3.png"
-  );
-  loadSprite(
-    "o4",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle4.png"
-  );
-  loadSprite(
-    "o5",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle5.png"
-  );
-  loadSprite(
-    "burst",
-    "https://ingalexander94.github.io/reto-umake/assets/ui/burst.png"
-  );
 };
-
-function generateObstacles() {
-  const obstacles = get("obstacle");
-  if (obstacles.length) {
-    obstacles.forEach((item) => item.destroy());
-  }
-  const random = Math.floor(Math.random() * 3) + 1;
-  for (let i = 0; i < 5; i++) {
-    const [x, y] = getPositionsChallengeOne(i, random);
-    const obstacle = [
-      sprite(`o${1 + i}`),
-      pos(x, y),
-      scale(isMobile ? 0.1 : 0.18, isMobile ? 0.1 : 0.18),
-      area(),
-      "obstacle",
-    ];
-    add(obstacle);
-  }
-}
 
 const move = (direction) => {
   let { x, y } = player.pos;
   x = parseInt(x);
   y = parseInt(y);
-  const isWinner = isMobile ? x > 230 && y < 25 : x > 310 && y < 40;
+  console.log({ x, y });
+  const isWinner = isMobile
+    ? (x < 25 && y < 70) || (y < 25 && x < 70)
+    : (x < 95 && y < 35) || (y < 95 && x < 35);
   if (isWinner && !direction.includes("GIRAR")) {
     $("#modal_success").modal("show");
   }

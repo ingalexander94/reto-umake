@@ -1,4 +1,9 @@
-import { getPositionsChallengeOne, getSpeed } from "./utils.js";
+import { setGemsText } from "./timer.js";
+import {
+  getPositionsChallengeTwo,
+  getPositionsGems,
+  getSpeed,
+} from "./utils.js";
 
 const $d = document;
 
@@ -24,12 +29,14 @@ $d.addEventListener("DOMContentLoaded", () => {
 
 let player = null;
 
+let numberGems = 0;
+
 const createGame = () => {
   kaboom(CONFIG);
   loadAssets();
   add([sprite(isMobile ? "layerm" : "layer"), scale(1, 1)]);
-  generateObstacles();
-
+  const random = Math.floor(Math.random() * 3) + 1;
+  generateObstacles(random);
   if (isMobile) {
     add([
       sprite("bar1"),
@@ -73,14 +80,17 @@ const createGame = () => {
       scale(0.025, 0.025),
     ]);
   }
+
   generateCollisions();
+  generateGems(random);
+  generateCollectGem();
 };
 
 function spin() {
   return {
     id: "spin",
     update() {
-      this.scale = Math.sin(time() * 2);
+      this.scale = Math.sin(time() * 3);
       this.angle = time() * 60;
     },
   };
@@ -98,6 +108,24 @@ const generateCollisions = () => {
     ]);
     wait(2, () => {
       location.reload();
+    });
+  });
+};
+
+const generateCollectGem = () => {
+  player.onCollide("gem", (gem) => {
+    gem.destroy();
+    const glow = add([
+      sprite("glow"),
+      pos(player.pos.x, player.pos.y),
+      rotate(0),
+      spin(),
+      anchor("center"),
+    ]);
+    numberGems += 1;
+    setGemsText(numberGems);
+    wait(1, () => {
+      glow.destroy();
     });
   });
 };
@@ -144,19 +172,34 @@ const loadAssets = () => {
     "https://ingalexander94.github.io/reto-umake/assets/ui/obstacle5.png"
   );
   loadSprite(
+    "g1",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/gem1.png"
+  );
+  loadSprite(
+    "g2",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/gem2.png"
+  );
+  loadSprite(
+    "g3",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/gem3.png"
+  );
+  loadSprite(
     "burst",
     "https://ingalexander94.github.io/reto-umake/assets/ui/burst.png"
   );
+  loadSprite(
+    "glow",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/glow.png"
+  );
 };
 
-function generateObstacles() {
+function generateObstacles(random) {
   const obstacles = get("obstacle");
   if (obstacles.length) {
     obstacles.forEach((item) => item.destroy());
   }
-  const random = Math.floor(Math.random() * 3) + 1;
   for (let i = 0; i < 5; i++) {
-    const [x, y] = getPositionsChallengeOne(i, random);
+    const [x, y] = getPositionsChallengeTwo(i, random);
     const obstacle = [
       sprite(`o${1 + i}`),
       pos(x, y),
@@ -168,13 +211,39 @@ function generateObstacles() {
   }
 }
 
+function generateGems(random) {
+  const gems = get("gem");
+  if (gems.length) {
+    gems.forEach((item) => item.destroy());
+  }
+  for (let i = 0; i < 3; i++) {
+    const [x, y] = getPositionsGems(i, random);
+    const gem = [
+      sprite(`g${1 + i}`),
+      pos(x, y),
+      scale(isMobile ? 0.1 : 0.18, isMobile ? 0.1 : 0.18),
+      area(),
+      "gem",
+    ];
+    add(gem);
+  }
+}
+
 const move = (direction) => {
   let { x, y } = player.pos;
   x = parseInt(x);
   y = parseInt(y);
   const isWinner = isMobile ? x > 230 && y < 25 : x > 310 && y < 40;
-  if (isWinner && !direction.includes("GIRAR")) {
-    $("#modal_success").modal("show");
+  if (
+    isWinner &&
+    !direction.includes("GIRAR") &&
+    !direction.includes("IZQUIERDA")
+  ) {
+    if (numberGems === 3) {
+      $("#modal_success").modal("show");
+    } else {
+      $("#modal_error").modal("show");
+    }
   }
   switch (direction) {
     case "IZQUIERDA":

@@ -31,7 +31,7 @@ class BlocksControl {
     toolboxDef += `<label text="" web-class="myLabelStyle"></label>`;
     toolboxDef += `<label text="" web-class="myLabelStyle"></label>`;
     toolboxDef += '<block type="move_direction_block"></block>';
-    if (this.#challenge === 2) {
+    if (this.#challenge === 3) {
       toolboxDef += `
       <block type="controls_repeat_ext">
         <value name="TIMES">

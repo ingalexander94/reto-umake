@@ -36,6 +36,9 @@
       <div class="wrapper">
         <article>
           <section class="dashboard">
+            <button data-toggle="modal" data-target="#modal_instructions">
+              Ver instrucciones
+            </button>
             <div class="no_copy frame">
               <canvas id="canvas"></canvas>
             </div>
@@ -43,10 +46,6 @@
               <button id="play"></button>
               <div class="timer">
                 <span>00:00</span>
-              </div>
-              <div>
-                <img src="./assets/ui/gem3.png" alt="Logo de gema" />
-                <span id="show_gemas">0/3</span>
               </div>
             </div>
           </section>
@@ -83,7 +82,7 @@
             <span>¡Aquí va otro texto!</span>
             <div class="buttons">
               <button class="btn-repeat">Repetir</button>
-              <button class="btn-continue active">?</button>
+              <button class="btn-continue active">Continuar</button>
             </div>
           </div>
         </div>
@@ -92,8 +91,8 @@
 
     <div
       class="modal fade"
-      id="modal_error"
-      data-target="#modal_error"
+      id="modal_instructions"
+      data-target="#modal_instructions"
       data-backdrop="static"
       data-keyboard="false"
       tabindex="-1"
@@ -103,13 +102,20 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div>
-            <h3>Título de la modal cuando falla</h3>
-            <p>
-              Colocar un texto que diga que debe recoger las tres gemas para
-              completar el juego
-            </p>
+            <h3>Instrucciones</h3>
+            <iframe
+              width="420"
+              height="315"
+              src="https://www.youtube.com/embed/wDJua9hgyZM?si=A9w-7q4IIzqLj59Z"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
             <div class="buttons">
-              <button class="btn-close active">Volver al juego</button>
+              <button class="btn-continue active" data-dismiss="modal">
+                Continuar
+              </button>
             </div>
           </div>
         </div>

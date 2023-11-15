@@ -1,19 +1,19 @@
 import { BlocksControl } from "./js/blocks.js";
-import { createGame, movePlayer } from "./js/kaboom_two.js";
+import { createGame, movePlayer } from "./js/kaboom_three.js";
 import { setTrashIcon, startTimer } from "./js/timer.js";
 
 const $d = document;
 
 const btnRepeat = $d.querySelector("button.btn-repeat");
-const btnContinue = $d.querySelector("button.btn-continue");
+const btnClose = $d.querySelector("button.btn-close");
 
-const blockControl = new BlocksControl("blocklyDiv", 2);
+const blockControl = new BlocksControl("blocklyDiv", 3);
 
 $d.addEventListener("DOMContentLoaded", () => {
   createGame();
   startTimer();
   blockControl.createMainBlock();
-  setTrashIcon(2);
+  setTrashIcon(3);
 });
 
 const btnPlay = $d.getElementById("play");
@@ -39,10 +39,6 @@ btnRepeat.addEventListener("click", () => {
   location.reload();
 });
 
-btnContinue.addEventListener("click", () => {
-  $("#modal_success").modal("hide");
-  window.location.replace(
-    "https://ingalexander94.github.io/reto-umake/reto3.html"
-  );
-  window.history.replaceState({}, document.title, window.location.href);
+btnClose.addEventListener("click", () => {
+  $("#modal_error").modal("hide");
 });
