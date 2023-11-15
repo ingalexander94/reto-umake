@@ -34,11 +34,13 @@ let player = null;
 
 let numberGems = 0;
 
+let random = 1;
+
 const createGame = () => {
   kaboom(CONFIG);
   loadAssets();
   add([sprite(isMobile ? "layerm" : "layer"), scale(1, 1)]);
-  const random = Math.floor(Math.random() * 3) + 1;
+  random = Math.floor(Math.random() * 3) + 1;
   generateObstacles(random);
   if (isMobile) {
     add([
@@ -113,6 +115,9 @@ const resetPlayer = () => {
     ]);
   }
   generateCollisions();
+  generateGems(random);
+  numberGems = 0;
+  setGemsText(0);
   generateCollectGem();
 };
 
@@ -162,6 +167,9 @@ const generateCollisions = () => {
         ]);
       }
       generateCollisions();
+      numberGems = 0;
+      setGemsText(0);
+      generateGems(random);
       generateCollectGem();
     });
   });
