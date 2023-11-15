@@ -72,7 +72,7 @@ const createGame = () => {
       rotate(0),
       anchor("center"),
       area(),
-      pos(370, 318),
+      pos(370, 315),
       scale(0.025, 0.025),
     ]);
   }
@@ -98,7 +98,7 @@ const resetPlayer = () => {
       rotate(0),
       anchor("center"),
       area(),
-      pos(370, 318),
+      pos(370, 315),
       scale(0.025, 0.025),
     ]);
   }
@@ -146,7 +146,7 @@ const generateCollisions = () => {
           rotate(0),
           anchor("center"),
           area(),
-          pos(370, 318),
+          pos(370, 315),
           scale(0.025, 0.025),
         ]);
       }
