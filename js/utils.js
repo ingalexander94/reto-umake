@@ -46,9 +46,9 @@ const getSpeed = async () => {
   const isMobile =
     window.innerWidth < 1100 && screen.orientation.type === "landscape-primary";
   if (isMobile) {
-    return refreshRate < 65 ? 2600 : 5800;
+    return refreshRate < 65 ? 2600 : 4280;
   } else {
-    return refreshRate < 65 ? 3450 : 5800;
+    return refreshRate < 65 ? 3450 : 4280;
   }
 };
 

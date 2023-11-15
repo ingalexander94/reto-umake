@@ -70,7 +70,6 @@ const move = (direction) => {
   let { x, y } = player.pos;
   x = parseInt(x);
   y = parseInt(y);
-  console.log({ x, y });
   const isWinner = isMobile
     ? (x < 25 && y < 70) || (y < 25 && x < 70)
     : (x < 95 && y < 35) || (y < 95 && x < 35);

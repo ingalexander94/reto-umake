@@ -50,7 +50,7 @@ class BlocksControl {
       init: function () {
         this.appendStatementInput("OPTIONS")
           .setCheck("Option")
-          .appendField("Ejecutar");
+          .appendField("Ejecutar  ");
         this.setColour(115);
         this.setOutput(false, null);
         this.setTooltip("Mover el objeto en direcciones específicas");
