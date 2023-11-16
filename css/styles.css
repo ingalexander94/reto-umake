@@ -22,7 +22,7 @@ body {
 
 .modal-content > div.modal-header {
   border: none;
-  height: fit-content;
+  height: 0;
   padding: 20px 30px 0 0;
 }
 

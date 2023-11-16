@@ -1,4 +1,4 @@
-import movements from "../assets/movements.json" assert { type: "json" };
+import { movements } from "./movements.js";
 
 const generateNumberAleatory = () => {
   let numeroAleatorio = Math.random();
