@@ -56,6 +56,7 @@ class BlocksControl {
           .appendField("Ejecutar  ");
         this.setColour(115);
         this.setOutput(true, "String");
+        this.setDeletable(false);
         this.setTooltip("Mover el objeto en direcciones específicas");
         this.setHelpUrl("");
       },
