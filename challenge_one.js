@@ -25,6 +25,7 @@ btnPlay.addEventListener("click", () => {
   if (movements.length) {
     btnPlay.style.display = "none";
     btnReplay.style.display = "block";
+    btnReplay.setAttribute("disabled", true);
     movePlayer(movements);
   }
 });
