@@ -266,7 +266,7 @@ function generateObstacles(random) {
     const obstacle = [
       sprite(`o${1 + i}`),
       pos(x, y),
-      scale(isMobile ? 0.1 : 0.17, isMobile ? 0.1 : 0.17),
+      scale(isMobile ? 0.1 : 0.16, isMobile ? 0.1 : 0.16),
       area(),
       "obstacle",
     ];
