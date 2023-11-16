@@ -266,7 +266,7 @@ function generateObstacles(random) {
     const obstacle = [
       sprite(`o${1 + i}`),
       pos(x, y),
-      scale(isMobile ? 0.1 : 0.18, isMobile ? 0.1 : 0.18),
+      scale(isMobile ? 0.1 : 0.17, isMobile ? 0.1 : 0.17),
       area(),
       "obstacle",
     ];
@@ -309,29 +309,19 @@ const move = (direction) => {
     }
   }
   switch (direction) {
-    case "IZQUIERDA":
-      player.move(-SPEED, 0);
+    case "AVANZAR":
+      const angle = (player.angle + 360) % 360;
+      if (angle === 0 || angle === 360) player.move(0, -SPEED);
+      else if (angle === 90) player.move(SPEED, 0);
+      else if (angle === 180) player.move(0, SPEED);
+      else if (angle === 270) player.move(-SPEED, 0);
+      else player.move(0, 0);
       break;
     case "DERECHA":
-      player.move(SPEED, 0);
+      player.angle = player.angle + 90;
       break;
-    case "ARRIBA":
-      player.move(0, -SPEED);
-      break;
-    case "ABAJO":
-      player.move(0, SPEED);
-      break;
-    case "GIRAR-DERECHA":
-      player.angle = 90;
-      break;
-    case "GIRAR-IZQUIERDA":
-      player.angle = -90;
-      break;
-    case "GIRAR-ARRIBA":
-      player.angle = 0;
-      break;
-    case "GIRAR-ABAJO":
-      player.angle = 180;
+    case "IZQUIERDA":
+      player.angle = player.angle - 90;
       break;
     default:
       player.angle = 0;

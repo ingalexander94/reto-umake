@@ -25,19 +25,7 @@ btnPlay.addEventListener("click", () => {
   if (movements.length) {
     btnPlay.style.display = "none";
     btnReplay.style.display = "block";
-    const instructions = [];
-    for (let i = 0; i < movements.length; i++) {
-      if (i === 0 && movements[0] !== "ARRIBA") {
-        instructions.push("GIRAR-" + movements[i]);
-        instructions.push(movements[i]);
-      } else {
-        if (i > 0 && !movements[i - 1].includes(movements[i])) {
-          instructions.push("GIRAR-" + movements[i]);
-        }
-        instructions.push(movements[i]);
-      }
-    }
-    movePlayer(instructions);
+    movePlayer(movements);
   }
 });
 
