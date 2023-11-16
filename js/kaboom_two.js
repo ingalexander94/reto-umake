@@ -259,6 +259,9 @@ function movePlayer(movements) {
       if (position === movements.length) {
         movements.length = 0;
       } else if (position < movements.length) {
+        if (position === movements.length - 1) {
+          btnReplay.removeAttribute("disabled");
+        }
         move(movements[position]);
       }
     });

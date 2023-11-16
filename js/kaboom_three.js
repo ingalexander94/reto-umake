@@ -64,7 +64,7 @@ const createGame = () => {
       anchor("center"),
       area(),
       pos(278, 238),
-      scale(0.018, 0.018),
+      scale(0.017, 0.017),
     ]);
   } else {
     add([
@@ -82,7 +82,7 @@ const createGame = () => {
       anchor("center"),
       area(),
       pos(370, 315),
-      scale(0.025, 0.025),
+      scale(0.024, 0.024),
     ]);
   }
 
@@ -101,7 +101,7 @@ const resetPlayer = () => {
       anchor("center"),
       area(),
       pos(278, 238),
-      scale(0.018, 0.018),
+      scale(0.017, 0.017),
     ]);
   } else {
     player = add([
@@ -111,7 +111,7 @@ const resetPlayer = () => {
       anchor("center"),
       area(),
       pos(370, 315),
-      scale(0.025, 0.025),
+      scale(0.024, 0.024),
     ]);
   }
   generateCollisions();
@@ -153,7 +153,7 @@ const generateCollisions = () => {
           anchor("center"),
           area(),
           pos(278, 238),
-          scale(0.018, 0.018),
+          scale(0.017, 0.017),
         ]);
       } else {
         player = add([
@@ -163,7 +163,7 @@ const generateCollisions = () => {
           anchor("center"),
           area(),
           pos(370, 315),
-          scale(0.025, 0.025),
+          scale(0.024, 0.024),
         ]);
       }
       generateCollisions();
@@ -338,6 +338,9 @@ function movePlayer(movements) {
       if (position === movements.length) {
         movements.length = 0;
       } else if (position < movements.length) {
+        if (position === movements.length - 1) {
+          btnReplay.removeAttribute("disabled");
+        }
         move(movements[position]);
       }
     });

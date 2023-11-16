@@ -36,13 +36,7 @@ class BlocksControl {
     toolboxDef += '<block type="move_front_block"></block>';
     if (this.#challenge === 3) {
       toolboxDef += `
-      <block type="repetir">
-          <value name="veces">
-              <shadow type="math_number">
-                  <field name="NUM">3</field>
-              </shadow>
-          </value>
-      </block>`;
+      <block type="repetir"> </block>`;
     }
     toolboxDef += "</xml>";
     return toolboxDef;
@@ -55,7 +49,7 @@ class BlocksControl {
           .setCheck("Option")
           .appendField("Ejecutar  ");
         this.setColour(115);
-        this.setOutput(true, "String");
+
         this.setDeletable(false);
         this.setTooltip("Mover el objeto en direcciones específicas");
         this.setHelpUrl("");
@@ -77,8 +71,19 @@ class BlocksControl {
   createBucleBlock() {
     Blockly.Blocks["repetir"] = {
       init: function () {
-        this.appendDummyInput().appendField("Repetir");
-        this.appendValueInput("veces").setCheck("Number");
+        this.appendDummyInput()
+          .appendField("Repetir")
+          .appendField(
+            new Blockly.FieldDropdown([
+              ["2", "2"],
+              ["3", "3"],
+              ["4", "4"],
+              ["5", "5"],
+              ["6", "6"],
+              ["7", "7"],
+            ]),
+            "veces"
+          );
         this.appendStatementInput("cuerpo").setCheck(null).appendField("veces");
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
@@ -91,11 +96,7 @@ class BlocksControl {
     };
 
     javascript.javascriptGenerator.forBlock["repetir"] = function (block) {
-      var veces = Blockly.JavaScript.valueToCode(
-        block,
-        "veces",
-        Blockly.JavaScript.ORDER_NONE
-      );
+      var veces = block.getFieldValue("veces");
       var cuerpo = Blockly.JavaScript.valueToCode(
         block,
         "cuerpo",
@@ -150,9 +151,7 @@ class BlocksControl {
         this.setNextStatement(true, null);
         this.setOutput(true, "String");
         this.setColour(224);
-        this.setTooltip(
-          "Mover el objeto en una dirección específica durante una distancia determinada"
-        );
+        this.setTooltip("Mueve la nave hacia al frente");
         this.setHelpUrl("");
       },
     };
@@ -167,9 +166,17 @@ class BlocksControl {
     let movements = [];
     let code = Blockly.JavaScript.workspaceToCode(this.#workspace).trim();
     if (code.length) {
-      code = code.split(",")[0];
-      movements = code.match(/'([^']+)'/g).map(function (match) {
-        return match.slice(1, -1);
+      code = code.replace(";", "").split(",");
+      code.forEach((text) => {
+        text = text.includes("99") ? text.replace("99", "").trim() : text;
+        if (text) {
+          const normalizeMovements = text
+            .match(/'([^']+)'/g)
+            .map(function (match) {
+              return match.slice(1, -1);
+            });
+          movements = [...movements, ...normalizeMovements];
+        }
       });
     }
     return movements;

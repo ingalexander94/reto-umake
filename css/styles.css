@@ -20,12 +20,18 @@ body {
   border-radius: 5px;
 }
 
-.modal-content > div {
+.modal-content > div.modal-header {
+  border: none;
+  height: fit-content;
+  padding: 20px 30px 0 0;
+}
+
+.modal-content > div:not(.modal-header) {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 50px 20px;
+  padding: 40px 20px;
   color: #00386a;
   font: normal normal 500 18px/20px Poppins;
   text-align: center;
@@ -199,10 +205,18 @@ main.game > div.wrapper article section.dashboard > div.info button {
   appearance: none;
   background-color: transparent;
   background-size: contain;
-
   background-repeat: no-repeat;
   outline: none;
   cursor: pointer;
+}
+
+main.game
+  > div.wrapper
+  article
+  section.dashboard
+  > div.info
+  button#replay:disabled {
+  filter: grayscale(1);
 }
 
 main.game > div.wrapper article section.dashboard > div.info button#play {
@@ -214,8 +228,13 @@ main.game > div.wrapper article section.dashboard > div.info button#replay {
   display: none;
 }
 
-main.game > div.wrapper article section.dashboard > div.info > button:active {
-  transform: scale(0.9);
+main.game
+  > div.wrapper
+  article
+  section.dashboard
+  > div.info
+  > button:not(:disabled):active {
+  transform: scale(0.9) !important;
 }
 
 main.game > div.wrapper article section.controls {
