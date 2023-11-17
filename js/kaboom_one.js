@@ -36,7 +36,7 @@ function spin() {
   };
 }
 
-const seSalio = () => {
+const validateOffscreen = () => {
   if (
     player.pos.x < 0 ||
     player.pos.x > width() ||
@@ -76,6 +76,7 @@ const seSalio = () => {
           scale(0.025, 0.025),
         ]);
       }
+      generateGoal();
     });
   }
 };
@@ -105,6 +106,14 @@ const createGame = () => {
       scale(0.025, 0.025),
     ]);
   }
+  generateGoal();
+};
+
+const generateGoal = () => {
+  add([pos(29, 29), sprite("goal"), anchor("center"), area(), "goal"]);
+  player.onCollide("goal", (_) => {
+    $("#modal_success").modal("show");
+  });
 };
 
 const resetPlayer = () => {
@@ -149,18 +158,13 @@ const loadAssets = () => {
     "burst",
     "https://ingalexander94.github.io/reto-umake/assets/ui/burst.png"
   );
+  loadSprite(
+    "goal",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/transparent.png"
+  );
 };
 
 const move = (direction) => {
-  let { x, y } = player.pos;
-  x = parseInt(x);
-  y = parseInt(y);
-  const isWinner = isMobile
-    ? (x < 25 && y < 70) || (y < 25 && x < 70)
-    : (x < 95 && y < 35) || (y < 95 && x < 35);
-  if (isWinner) {
-    $("#modal_success").modal("show");
-  }
   switch (direction) {
     case "AVANZAR":
       const angle = (player.angle + 360) % 360;
@@ -181,7 +185,7 @@ const move = (direction) => {
       player.move(0, 0);
       break;
   }
-  seSalio();
+  validateOffscreen();
 };
 
 function movePlayer(movements) {

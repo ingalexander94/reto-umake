@@ -77,6 +77,14 @@ const createGame = () => {
     ]);
   }
   generateCollisions();
+  generateGoal();
+};
+
+const generateGoal = () => {
+  add([pos(370, 29), sprite("goal"), anchor("center"), area(), "goal"]);
+  player.onCollide("goal", (_) => {
+    $("#modal_success").modal("show");
+  });
 };
 
 const resetPlayer = () => {
@@ -114,6 +122,52 @@ function spin() {
     },
   };
 }
+
+const validateOffscreen = () => {
+  if (
+    player.pos.x < 0 ||
+    player.pos.x > width() ||
+    player.pos.y < 0 ||
+    player.pos.y > height()
+  ) {
+    player.destroy();
+    const burst = add([
+      sprite("burst"),
+      pos(width() / 2, height() / 2),
+      rotate(0),
+      spin(),
+      anchor("center"),
+    ]);
+    wait(2, () => {
+      burst.destroy();
+      btnPlay.style.display = "block";
+      btnReplay.style.display = "none";
+      if (isMobile) {
+        player = add([
+          timer(),
+          sprite("player"),
+          rotate(0),
+          anchor("center"),
+          area(),
+          pos(278, 238),
+          scale(0.018, 0.018),
+        ]);
+      } else {
+        player = add([
+          timer(),
+          sprite("player"),
+          rotate(0),
+          anchor("center"),
+          area(),
+          pos(370, 315),
+          scale(0.025, 0.025),
+        ]);
+      }
+      generateCollisions();
+      generateGoal();
+    });
+  }
+};
 
 const generateCollisions = () => {
   player.onCollide("obstacle", (_) => {
@@ -200,6 +254,10 @@ const loadAssets = () => {
     "burst",
     "https://ingalexander94.github.io/reto-umake/assets/ui/burst.png"
   );
+  loadSprite(
+    "goal",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/transparent.png"
+  );
 };
 
 function generateObstacles() {
@@ -222,13 +280,6 @@ function generateObstacles() {
 }
 
 const move = (direction) => {
-  let { x, y } = player.pos;
-  x = parseInt(x);
-  y = parseInt(y);
-  const isWinner = isMobile ? x > 230 && y < 25 : x > 310 && y < 40;
-  if (isWinner && !direction.includes("GIRAR")) {
-    $("#modal_success").modal("show");
-  }
   switch (direction) {
     case "AVANZAR":
       const angle = (player.angle + 360) % 360;
@@ -249,6 +300,7 @@ const move = (direction) => {
       player.move(0, 0);
       break;
   }
+  validateOffscreen();
 };
 
 function movePlayer(movements) {
