@@ -3,6 +3,7 @@ import { getSpeed } from "./utils.js";
 const $d = document;
 
 const canvas = $d.getElementById("canvas");
+const btnPlay = $d.getElementById("play");
 const btnReplay = $d.getElementById("replay");
 
 const isMobile =
@@ -24,6 +25,60 @@ $d.addEventListener("DOMContentLoaded", () => {
 });
 
 let player = null;
+
+function spin() {
+  return {
+    id: "spin",
+    update() {
+      this.scale = Math.sin(time() * 2);
+      this.angle = time() * 60;
+    },
+  };
+}
+
+const seSalio = () => {
+  if (
+    player.pos.x < 0 ||
+    player.pos.x > width() ||
+    player.pos.y < 0 ||
+    player.pos.y > height()
+  ) {
+    player.destroy();
+    const burst = add([
+      sprite("burst"),
+      pos(width() / 2, height() / 2),
+      rotate(0),
+      spin(),
+      anchor("center"),
+    ]);
+    wait(2, () => {
+      burst.destroy();
+      btnPlay.style.display = "block";
+      btnReplay.style.display = "none";
+      if (isMobile) {
+        player = add([
+          timer(),
+          sprite("player"),
+          rotate(0),
+          anchor("center"),
+          area(),
+          pos(278, 238),
+          scale(0.018, 0.018),
+        ]);
+      } else {
+        player = add([
+          timer(),
+          sprite("player"),
+          rotate(0),
+          anchor("center"),
+          area(),
+          pos(370, 315),
+          scale(0.025, 0.025),
+        ]);
+      }
+    });
+  }
+};
 
 const createGame = () => {
   kaboom(CONFIG);
@@ -90,6 +145,10 @@ const loadAssets = () => {
     "player",
     "https://ingalexander94.github.io/reto-umake/assets/ui/player.png"
   );
+  loadSprite(
+    "burst",
+    "https://ingalexander94.github.io/reto-umake/assets/ui/burst.png"
+  );
 };
 
 const move = (direction) => {
@@ -122,6 +181,7 @@ const move = (direction) => {
       player.move(0, 0);
       break;
   }
+  seSalio();
 };
 
 function movePlayer(movements) {
