@@ -205,6 +205,7 @@ const generateCollisions = () => {
         ]);
       }
       generateCollisions();
+      generateGoal();
     });
   });
 };

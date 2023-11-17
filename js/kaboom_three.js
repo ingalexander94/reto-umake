@@ -89,6 +89,7 @@ const createGame = () => {
   generateCollisions();
   generateGems(random);
   generateCollectGem();
+  generateGoal();
 };
 
 const generateGoal = () => {
@@ -130,6 +131,7 @@ const resetPlayer = () => {
   numberGems = 0;
   setGemsText(0);
   generateCollectGem();
+  generateGoal();
 };
 
 function spin() {
@@ -232,6 +234,7 @@ const generateCollisions = () => {
       setGemsText(0);
       generateGems(random);
       generateCollectGem();
+      generateGoal();
     });
   });
 };
