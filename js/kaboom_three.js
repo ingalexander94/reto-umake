@@ -96,14 +96,17 @@ const generateGoal = () => {
   add([pos(370, 29), sprite("goal"), anchor("center"), area(), "goal"]);
   player.onCollide("goal", (_) => {
     if (numberGems === 3) {
+      play("win");
       $("#modal_success").modal("show");
     } else {
+      play("lost");
       $("#modal_error").modal("show");
     }
   });
 };
 
 const resetPlayer = () => {
+  play("run");
   player.destroy();
   if (isMobile) {
     player = add([
@@ -151,6 +154,7 @@ const validateOffscreen = () => {
     player.pos.y < 0 ||
     player.pos.y > height()
   ) {
+    play("crash");
     player.destroy();
     const burst = add([
       sprite("burst"),
@@ -191,11 +195,15 @@ const validateOffscreen = () => {
       setGemsText(0);
       generateCollectGem();
     });
+    setTimeout(() => {
+      play("lost");
+    }, 1000);
   }
 };
 
 const generateCollisions = () => {
   player.onCollide("obstacle", (_) => {
+    play("crash");
     player.destroy();
     const burst = add([
       sprite("burst"),
@@ -236,12 +244,16 @@ const generateCollisions = () => {
       generateCollectGem();
       generateGoal();
     });
+    setTimeout(() => {
+      play("lost");
+    }, 1000);
   });
 };
 
 const generateCollectGem = () => {
   player.onCollide("gem", (gem) => {
     gem.destroy();
+    play("grab");
     const glow = add([
       sprite("glow"),
       pos(player.pos.x, player.pos.y),
@@ -322,6 +334,30 @@ const loadAssets = () => {
     "goal",
     "https://ingalexander94.github.io/reto-umake/assets/ui/transparent.png"
   );
+  loadSound(
+    "run",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/run.wav"
+  );
+  loadSound(
+    "move",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/move.wav"
+  );
+  loadSound(
+    "crash",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/crash.wav"
+  );
+  loadSound(
+    "win",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/win.mp3"
+  );
+  loadSound(
+    "lost",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/lost.mp3"
+  );
+  loadSound(
+    "grab",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/grab.wav"
+  );
 };
 
 function generateObstacles(random) {
@@ -395,6 +431,7 @@ function movePlayer(movements) {
         if (position === movements.length - 1) {
           btnReplay.removeAttribute("disabled");
         }
+        position === 0 ? play("run") : play("move");
         move(movements[position]);
       }
     });

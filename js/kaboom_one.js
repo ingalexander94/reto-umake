@@ -43,6 +43,7 @@ const validateOffscreen = () => {
     player.pos.y < 0 ||
     player.pos.y > height()
   ) {
+    play("crash");
     player.destroy();
     const burst = add([
       sprite("burst"),
@@ -78,10 +79,13 @@ const validateOffscreen = () => {
       }
       generateGoal();
     });
+    setTimeout(() => {
+      play("lost");
+    }, 1000);
   }
 };
 
-const createGame = () => {
+const createGame = async () => {
   kaboom(CONFIG);
   loadAssets();
   add([sprite(isMobile ? "layerm" : "layer"), scale(1, 1)]);
@@ -112,11 +116,13 @@ const createGame = () => {
 const generateGoal = () => {
   add([pos(29, 29), sprite("goal"), anchor("center"), area(), "goal"]);
   player.onCollide("goal", (_) => {
+    play("win");
     $("#modal_success").modal("show");
   });
 };
 
 const resetPlayer = () => {
+  play("run");
   player.destroy();
   if (isMobile) {
     player = add([
@@ -162,6 +168,26 @@ const loadAssets = () => {
     "goal",
     "https://ingalexander94.github.io/reto-umake/assets/ui/transparent.png"
   );
+  loadSound(
+    "run",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/run.wav"
+  );
+  loadSound(
+    "move",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/move.wav"
+  );
+  loadSound(
+    "crash",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/crash.wav"
+  );
+  loadSound(
+    "win",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/win.mp3"
+  );
+  loadSound(
+    "lost",
+    "https://ingalexander94.github.io/reto-umake/assets/audio/lost.mp3"
+  );
 };
 
 const move = (direction) => {
@@ -199,6 +225,7 @@ function movePlayer(movements) {
         if (position === movements.length - 1) {
           btnReplay.removeAttribute("disabled");
         }
+        position === 0 ? play("run") : play("move");
         move(movements[position]);
       }
     });

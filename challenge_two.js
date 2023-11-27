@@ -15,6 +15,7 @@ $d.addEventListener("DOMContentLoaded", () => {
   startTimer();
   blockControl.createMainBlock();
   setTrashIcon(2);
+  $("#modal_instructions").modal("show");
 });
 
 const btnPlay = $d.getElementById("play");
