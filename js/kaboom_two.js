@@ -113,6 +113,7 @@ const resetPlayer = () => {
     ]);
   }
   generateCollisions();
+  generateGoal();
 };
 
 function spin() {
