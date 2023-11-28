@@ -257,10 +257,12 @@ main.game
 
 main.game > div.wrapper article section.dashboard > div.info button#play {
   background-image: url("../assets/ui/play.png");
+  height: 50px;
 }
 
 main.game > div.wrapper article section.dashboard > div.info button#replay {
   background-image: url("../assets/ui/replay.png");
+  height: 50px;
   display: none;
 }
 
