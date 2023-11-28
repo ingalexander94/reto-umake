@@ -127,7 +127,8 @@ main.game > div.wrapper article section.dashboard {
   position: relative;
 }
 
-main.game > div.wrapper article section.dashboard > button {
+main.game > div.wrapper article section.dashboard > button,
+main.game > div.wrapper article section.dashboard > label {
   position: absolute;
   top: -50px;
   border-top-left-radius: 10px;
@@ -145,9 +146,39 @@ main.game > div.wrapper article section.dashboard > button {
   cursor: pointer;
 }
 
+main.game > div.wrapper article section.dashboard > label {
+  left: 40%;
+  background: none;
+}
+
+main.game > div.wrapper article section.dashboard > label i::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f028";
+  font-style: normal;
+}
+
+main.game > div.wrapper article section.dashboard > label input {
+  display: none;
+}
+
+main.game
+  > div.wrapper
+  article
+  section.dashboard
+  > label
+  input:checked
+  ~ i::before {
+  content: "\f6a9";
+}
+
 main.game > div.wrapper article section.dashboard > button:hover {
   background: #18a4cf;
   transition: 0.5 all ease-in;
+}
+
+main.game > div.wrapper article section.dashboard > label:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 main.game > div.wrapper article section.dashboard > div:not(.info) {
