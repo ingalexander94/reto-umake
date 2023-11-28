@@ -48,6 +48,11 @@ body {
   object-fit: contain;
 }
 
+.modal-content > div ul li {
+  text-align: left;
+  margin: 10px 0;
+}
+
 .modal-content > div div.buttons {
   display: flex;
   column-gap: 20px;

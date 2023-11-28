@@ -17,7 +17,7 @@ const blockControl = new BlocksControl("blocklyDiv", 1);
 
 $d.addEventListener("DOMContentLoaded", () => {
   audio.loop = true;
-  audio.volume = 0.2;
+  audio.volume = 0.05;
   toggleAudio.setAttribute("checked", false);
   createGame();
   startTimer();

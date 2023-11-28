@@ -43,7 +43,9 @@ const validateOffscreen = () => {
     player.pos.y < 0 ||
     player.pos.y > height()
   ) {
-    play("crash");
+    play("crash", {
+      volume: 0.05,
+    });
     player.destroy();
     const burst = add([
       sprite("burst"),
@@ -80,7 +82,9 @@ const validateOffscreen = () => {
       generateGoal();
     });
     setTimeout(() => {
-      play("lost");
+      play("lost", {
+        volume: 0.05,
+      });
     }, 1000);
   }
 };
@@ -116,13 +120,17 @@ const createGame = async () => {
 const generateGoal = () => {
   add([pos(29, 29), sprite("goal"), anchor("center"), area(), "goal"]);
   player.onCollide("goal", (_) => {
-    play("win");
+    play("win", {
+      volume: 0.05,
+    });
     $("#modal_success").modal("show");
   });
 };
 
 const resetPlayer = () => {
-  play("run");
+  play("run", {
+    volume: 0.05,
+  });
   player.destroy();
   if (isMobile) {
     player = add([
@@ -225,7 +233,13 @@ function movePlayer(movements) {
         if (position === movements.length - 1) {
           btnReplay.removeAttribute("disabled");
         }
-        position === 0 ? play("run") : play("move");
+        position === 0
+          ? play("run", {
+              volume: 0.05,
+            })
+          : play("move", {
+              volume: 0.05,
+            });
         move(movements[position]);
       }
     });
