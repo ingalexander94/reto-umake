@@ -96,17 +96,17 @@ const generateGoal = () => {
   add([pos(370, 29), sprite("goal"), anchor("center"), area(), "goal"]);
   player.onCollide("goal", (_) => {
     if (numberGems === 3) {
-      play("win");
+      play("win", { volume: 0.05 });
       $("#modal_success").modal("show");
     } else {
-      play("lost");
+      play("lost", { volume: 0.05 });
       $("#modal_error").modal("show");
     }
   });
 };
 
 const resetPlayer = () => {
-  play("run");
+  play("run", { volume: 0.05 });
   player.destroy();
   if (isMobile) {
     player = add([
@@ -154,7 +154,7 @@ const validateOffscreen = () => {
     player.pos.y < 0 ||
     player.pos.y > height()
   ) {
-    play("crash");
+    play("crash", { volume: 0.05 });
     player.destroy();
     const burst = add([
       sprite("burst"),
@@ -196,14 +196,14 @@ const validateOffscreen = () => {
       generateCollectGem();
     });
     setTimeout(() => {
-      play("lost");
+      play("lost", { volume: 0.05 });
     }, 1000);
   }
 };
 
 const generateCollisions = () => {
   player.onCollide("obstacle", (_) => {
-    play("crash");
+    play("crash", { volume: 0.05 });
     player.destroy();
     const burst = add([
       sprite("burst"),
@@ -245,7 +245,7 @@ const generateCollisions = () => {
       generateGoal();
     });
     setTimeout(() => {
-      play("lost");
+      play("lost", { volume: 0.05 });
     }, 1000);
   });
 };
@@ -253,7 +253,7 @@ const generateCollisions = () => {
 const generateCollectGem = () => {
   player.onCollide("gem", (gem) => {
     gem.destroy();
-    play("grab");
+    play("grab", { volume: 0.05 });
     const glow = add([
       sprite("glow"),
       pos(player.pos.x, player.pos.y),
@@ -431,7 +431,9 @@ function movePlayer(movements) {
         if (position === movements.length - 1) {
           btnReplay.removeAttribute("disabled");
         }
-        position === 0 ? play("run") : play("move");
+        position === 0
+          ? play("run", { volume: 0.05 })
+          : play("move", { volume: 0.05 });
         move(movements[position]);
       }
     });
